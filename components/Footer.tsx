@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer>
-      <h1>Footer</h1>
+      <p>© 2022 Tsubasa Endo</p>
     </footer>
   );
 };

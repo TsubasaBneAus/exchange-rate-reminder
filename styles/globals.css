@@ -1,0 +1,57 @@
+header {
+  color: white;
+  background-color: rgb(13, 63, 181);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  height: 45px;
+}
+
+header nav ul li {
+  display: inline-block;
+}
+
+footer {
+  color: white;
+  background-color: rgb(13, 63, 181);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-image: url(https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 100;
+}
+
+body::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 45px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+main {
+  height: 100%;
+  bottom: 0;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
