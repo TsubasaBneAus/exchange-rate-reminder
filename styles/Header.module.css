@@ -1,7 +1,40 @@
+.header {
+  color: white;
+  background-color: rgb(13, 63, 181);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  font-family: "Noto Sans", "Noto Sans JP";
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.li {
+  display: inline-block;
+}
+
 .title {
-    font-size: 30px;
+  font-size: 30px;
+  font-weight: 300;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .navbar {
+  font-size: 17px;
+  font-weight: 300;
+  padding-left: 15px;
+}
+
+@media screen and (max-width: 500px) {
+  .title {
     font-size: 20px;
+  }
+
+  .navbar {
+    font-size: 14px;
+    padding-left: 8px;
+  }
 }
