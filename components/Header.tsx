@@ -10,7 +10,7 @@ const Header = () => {
       <nav>
         <ul>
           <li className={styles.li}>
-            <Link href="/signup" className={styles.navbar}>
+            <Link href="/register" className={styles.navbar}>
               登録
             </Link>
           </li>
