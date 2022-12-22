@@ -8,7 +8,7 @@ const Header = () => {
         Exchange Rate Reminder
       </Link>
       <nav>
-        <ul>
+        <ul className={styles.ul}>
           <li className={styles.li}>
             <Link href="/register" className={styles.navbar}>
               登録
