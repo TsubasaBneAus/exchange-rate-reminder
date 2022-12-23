@@ -1,15 +1,15 @@
 import { useState } from "react";
 import styles from "../styles/login.module.css";
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState("example@gmail.com");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("password");
 
   return (
     <form className={styles.form}>
-      <h1>ログイン</h1>
-      <hr />
-      <div>
+      <h1 className={styles.title}>ログイン</h1>
+      <hr className={styles.bar} />
+      <div className={styles.inputField}>
         <label>メールアドレス</label>
         <input
           type="text"
@@ -17,7 +17,7 @@ const login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
+      <div className={styles.inputField}>
         <label>パスワード</label>
         <input
           type="text"
@@ -30,4 +30,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

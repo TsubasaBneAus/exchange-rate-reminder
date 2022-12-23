@@ -11,7 +11,7 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div className={styles.filter}>
+      <div className={styles.image_filter}>
         <main>{children}</main>
       </div>
       <Footer />
