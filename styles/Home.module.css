@@ -1,14 +1,16 @@
 .layout {
-  padding: 15%;
-  height: 100%;
-  /* width: 100%; */
-  background-image: url(https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 50px;
 }
 
 .explanation {
   font-size: 30px;
   font-weight: 400;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
 }
