@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styles from "../styles/register.module.css";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password1: "",
+    password2: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const register = () => {
+    
+  }
 
   return (
-    <form className={styles.formContainer}>
+    <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
       <h1 className={styles.title}>アカウント登録</h1>
       <hr className={styles.bar} />
       <div className={styles.form}>
@@ -16,9 +27,10 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
+            name="email"
             placeholder="example@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formValues.email}
+            onChange={(e) => handleChange(e)}
           />
         </div>
         <div className={styles.inputField}>
@@ -26,9 +38,10 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
+            name="password1"
             placeholder="password"
-            value={password1}
-            onChange={(e) => setPassword1(e.target.value)}
+            value={formValues.password1}
+            onChange={(e) => handleChange(e)}
           />
         </div>
         <div className={styles.inputField}>
@@ -36,12 +49,13 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
+            name="password2"
             placeholder="password"
-            value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
+            value={formValues.password2}
+            onChange={(e) => handleChange(e)}
           />
         </div>
-        <button className={styles.button} type="submit">
+        <button className={styles.button} type="submit" onClick={register}>
           登録
         </button>
       </div>

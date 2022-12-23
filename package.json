@@ -2,6 +2,7 @@
   "name": "exchange-rate-app-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
