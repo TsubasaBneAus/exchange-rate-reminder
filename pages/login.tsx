@@ -15,15 +15,9 @@ const Login = () => {
   const [message, setMessage] = useState("");
 
   const login = async () => {
-    try {
       const res = await fetch("/login");
-      console.log(res);
       const json = await res.json();
-      console.log(json);
-      await setMessage(json.message);
-    } catch(err){
-      console.log(err);
-    }
+      setMessage(json.message);
   };
 
   // const login = () => {
