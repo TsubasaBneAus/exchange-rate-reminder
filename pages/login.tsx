@@ -15,16 +15,10 @@ const Login = () => {
   const [message, setMessage] = useState("");
 
   const login = async () => {
-      const res = await fetch("/login");
-      const json = await res.json();
-      setMessage(json.message);
+    const res = await fetch("/api/login");
+    const data = await res.json();
+    setMessage(data.name);
   };
-
-  // const login = () => {
-  //   fetch("/login")
-  //     .then((res) => res.json())
-  //     .then((data) => setMessage(data.message));
-  // };
 
   return (
     <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
