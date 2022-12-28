@@ -16,8 +16,10 @@ const Login = () => {
 
   const login = async () => {
     const res = await fetch("/api/login");
-    const data = await res.json();
-    setMessage(data.name);
+    // const data = await res.json();
+    // console.log(res);
+    console.log(res);
+    // setMessage(data.email);
   };
 
   return (
