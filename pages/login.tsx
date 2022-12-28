@@ -12,19 +12,24 @@ const Login = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState([]);
 
   const login = async () => {
-    const res = await fetch("/api/login");
-    // const data = await res.json();
-    // console.log(res);
-    console.log(res);
-    // setMessage(data.email);
+    const res = await fetch("http://localhost:3000/api/getData");
+    const data = await res.json();
+    console.log(data.results);
+    setMessage(data.results);
+    // console.log(message[0].id);
+    console.log(message[0]);
   };
 
   return (
     <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
       <h1 className={styles.title}>ログイン</h1>
+      {/* {message[0].id}
+      {message[0].email}
+      {message[0].password} */}
+      {/* <h1>{message[0].id}</h1> */}
       <hr className={styles.bar} />
       <div className={styles.form}>
         <div className={styles.inputField}>
@@ -39,7 +44,7 @@ const Login = () => {
           />
         </div>
         <div className={styles.inputField}>
-          <label className={styles.inputLabel}>パスワード:{message}</label>
+          <label className={styles.inputLabel}>パスワード</label>
           <input
             className={styles.input}
             type="text"
