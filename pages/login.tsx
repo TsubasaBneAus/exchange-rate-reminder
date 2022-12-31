@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styles from "../styles/login.module.css";
 
 const Login = () => {
@@ -15,21 +15,22 @@ const Login = () => {
   const [message, setMessage] = useState([]);
 
   const login = async () => {
-    const res = await fetch("http://localhost:3000/api/getData");
+    const url = "http://localhost:3000/api/login";
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formValues),
+    });
     const data = await res.json();
-    console.log(data.results);
-    setMessage(data.results);
-    // console.log(message[0].id);
-    console.log(message[0]);
+    // setMessage(data.results);
+    console.log(data);
   };
 
   return (
     <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
       <h1 className={styles.title}>ログイン</h1>
-      {/* {message[0].id}
-      {message[0].email}
-      {message[0].password} */}
-      {/* <h1>{message[0].id}</h1> */}
       <hr className={styles.bar} />
       <div className={styles.form}>
         <div className={styles.inputField}>
@@ -37,6 +38,7 @@ const Login = () => {
           <input
             className={styles.input}
             type="text"
+            autoComplete="off"
             name="email"
             placeholder="example@gmail.com"
             value={formValues.email}
@@ -48,6 +50,7 @@ const Login = () => {
           <input
             className={styles.input}
             type="text"
+            autoComplete="off"
             name="password"
             placeholder="password"
             value={formValues.password}

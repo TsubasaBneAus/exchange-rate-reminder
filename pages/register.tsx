@@ -14,7 +14,7 @@ const Register = () => {
   };
 
   const register = () => {
-    
+
   }
 
   return (
@@ -27,6 +27,7 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
+            autoComplete="no"
             name="email"
             placeholder="example@gmail.com"
             value={formValues.email}
@@ -38,6 +39,7 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
+            autoComplete="off"
             name="password1"
             placeholder="password"
             value={formValues.password1}
@@ -49,6 +51,7 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
+            autoComplete="off"
             name="password2"
             placeholder="password"
             value={formValues.password2}

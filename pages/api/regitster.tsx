@@ -1,7 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import executeQuery from "../../lib/db";
 
-const register = (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ name: "John Doe" });
+const login = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const query = "SELECT * FROM users";
+    const value: never[] = [];
+    const data = await executeQuery(query, value);
+    res.status(200).json({ results: data });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-export default register;
+export default login;
