@@ -12,6 +12,6 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  secret: '98c735d2ebefa220ea7354e7ac477942',
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
 });
