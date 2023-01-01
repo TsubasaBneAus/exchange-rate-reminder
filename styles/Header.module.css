@@ -1,7 +1,47 @@
+.header {
+  background-color: rgb(13, 63, 181);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  font-family: "Noto Sans", "Noto Sans JP";
+  height: 52px;
+}
+
+.li {
+  display: inline-block;
+}
+
 .title {
-    font-size: 30px;
+  color: white;
+  font-size: 30px;
+  font-weight: 300;
+  text-decoration: none;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .navbar {
+  color: white;
+  font-size: 17px;
+  font-weight: 300;
+  text-decoration: none;
+  padding-left: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  .title {
     font-size: 20px;
+    padding-left: 5px;
+  }
+
+  .ul {
+    padding-left: 0px;
+  }
+
+  .navbar {
+    font-size: 14px;
+    padding-left: 8px;
+  }
 }

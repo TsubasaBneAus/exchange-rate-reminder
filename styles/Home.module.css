@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 50px;
+}
+
+.explanation {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
