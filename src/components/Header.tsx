@@ -9,7 +9,13 @@ const Header = () => {
       return (
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <button className={styles.button} onClick={() => signOut()}>
+            <Link className={styles.link} href="/mypage">
+              マイページ
+            </Link>
+            <button
+              className={styles.button}
+              onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}
+            >
               ログアウト
             </button>
           </li>

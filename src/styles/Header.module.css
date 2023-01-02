@@ -22,6 +22,14 @@
   align-items: center;
 }
 
+.link {
+  color: white;
+  font-size: 17px;
+  font-weight: 300;
+  text-decoration: none;
+  padding-right: 10px;
+}
+
 .button {
   all: unset;
   cursor: pointer;
@@ -40,7 +48,7 @@
     padding-left: 0px;
   }
 
-  .button {
+  .link, .button {
     font-size: 14px;
   }
 }
