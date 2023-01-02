@@ -22,12 +22,12 @@
   align-items: center;
 }
 
-.navbar {
+.button {
+  all: unset;
+  cursor: pointer;
   color: white;
   font-size: 17px;
   font-weight: 300;
-  text-decoration: none;
-  padding-left: 15px;
 }
 
 @media screen and (max-width: 600px) {
@@ -40,8 +40,7 @@
     padding-left: 0px;
   }
 
-  .navbar {
+  .button {
     font-size: 14px;
-    padding-left: 8px;
   }
 }
