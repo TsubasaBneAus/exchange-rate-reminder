@@ -1,7 +1,13 @@
-const mypage = () => {
-  return (
-    <h1>マイページ</h1>
-  );
-}
+import { useSession } from "next-auth/react";
 
-export default mypage;
+const MyPage = () => {
+  const { data: session } = useSession();
+
+  if (!session) {
+    return <h1>アカウント登録またはログインしてください</h1>
+  } else {
+    return <h1>マイページ</h1>;
+  }
+};
+
+export default MyPage;
