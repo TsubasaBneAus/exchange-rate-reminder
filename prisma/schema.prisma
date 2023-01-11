@@ -56,10 +56,10 @@ model VerificationToken {
 }
 
 model ExchangeRate {
-  id             Int     @id @default(autoincrement())
-  time_stamp     String?
-  base_currency  String?
-  fetched_date   String?
+  id                Int     @id @default(autoincrement())
+  fetched_datetime  String
+  is_data_fetched   String
+  base_currency     String?
   rate_aed Float?
   rate_afn Float?
   rate_all Float?
