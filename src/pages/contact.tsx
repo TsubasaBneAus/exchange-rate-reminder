@@ -1,78 +1,64 @@
-import { useRef } from "react";
+import { ChangeEvent, useState } from "react";
+import styles from "../styles/Contact.module.css";
 
 const Contact = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password1: "",
+    password2: "",
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("送信中・・・");
-    console.log(nameRef.current?.value);
-
-    let data = {
-      name: nameRef.current?.value,
-      email: emailRef.current?.value,
-      message: messageRef.current?.value,
-    };
-
-    await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status === 200) console.log("送信に成功しました");
-    });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
+  const register = () => {};
+
   return (
-    <div>
-      <h2>Next.jsでメール送信</h2>
-      <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="name">
-            お名前
-          </label>
+    <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
+      <h1 className={styles.title}>アカウント登録</h1>
+      <hr className={styles.bar} />
+      <div className={styles.form}>
+        <div className={styles.inputField}>
+          <label className={styles.inputLabel}>メールアドレス</label>
           <input
-            className="form-control"
+            className={styles.input}
             type="text"
-            id="name"
-            required
-            ref={nameRef}
+            name="email"
+            placeholder="example@gmail.com"
+            value={formValues.email}
+            onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="email">
-            メールアドレス
-          </label>
+        <div className={styles.inputField}>
+          <label className={styles.inputLabel}>パスワード</label>
           <input
-            className="form-control"
-            type="email"
-            id="email"
-            required
-            ref={emailRef}
+            className={styles.input}
+            type="text"
+            name="password1"
+            placeholder="password"
+            value={formValues.password1}
+            onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="message">
-            メッセージ
-          </label>
-          <textarea
-            className="form-control"
-            id="message"
-            required
-            ref={messageRef}
+        <div className={styles.inputField}>
+          <label className={styles.inputLabel}>パスワード再入力</label>
+          <input
+            className={styles.input}
+            type="text"
+            name="password2"
+            placeholder="password"
+            value={formValues.password2}
+            onChange={(e) => handleChange(e)}
           />
         </div>
-        <button className="btn btn-danger" type="submit">
-          メール送信
+        <button className={styles.button} type="submit" onClick={register}>
+          登録
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
-}
+};
 
 export default Contact;
