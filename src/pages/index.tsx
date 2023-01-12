@@ -3,12 +3,12 @@ import { useSession } from "next-auth/react";
 
 const Home = () => {
   const { data: session } = useSession();
+
+  // Check if users have already logged in
   if (session) {
     return (
       <div className={styles.layout}>
-        <h1 className={styles.explanation}>
-          ようこそ {session.user?.name}
-        </h1>
+        <h1 className={styles.explanation}>ようこそ {session.user?.name}</h1>
       </div>
     );
   } else {

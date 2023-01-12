@@ -5,12 +5,18 @@ import styles from "../styles/Header.module.css";
 const Header = () => {
   const { data: session } = useSession();
   const navbar = () => {
+    // Check if users have already logged in
     if (session) {
       return (
         <ul className={styles.ul}>
           <li className={styles.li}>
             <Link className={styles.link} href="/mypage">
               マイページ
+            </Link>
+          </li>
+          <li className={styles.li}>
+            <Link className={styles.link} href="/contact">
+              お問い合わせ
             </Link>
           </li>
           <li className={styles.li}>
@@ -33,6 +39,11 @@ const Header = () => {
             >
               登録・ログイン
             </button>
+          </li>
+          <li className={styles.li}>
+            <Link className={styles.link} href="/contact">
+              お問い合わせ
+            </Link>
           </li>
         </ul>
       );
