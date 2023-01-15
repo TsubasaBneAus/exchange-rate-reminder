@@ -1,0 +1,11 @@
+.image_filter {
+  height: calc(100vh - 52px);
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 700px) {
+  .image_filter {
+    height: calc(100vh - 65px);
+  }
+}
