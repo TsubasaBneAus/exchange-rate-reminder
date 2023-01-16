@@ -1,4 +1,16 @@
-.layout {
+.container1 {
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.6);
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+.container2 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,10 +19,34 @@
   margin-top: 50px;
 }
 
+.container3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p {
+  font-size: 30px;
+  font-weight: 700;
+}
+
 .explanation {
   font-size: 30px;
   font-weight: 400;
   text-align: center;
   margin-top: 30px;
   margin-bottom: 0px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20%;
+  margin: 10px 10%;
+}
+
+.label {
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
