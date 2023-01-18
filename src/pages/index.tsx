@@ -89,7 +89,7 @@ const Home = () => {
             設定を保存
           </button>
         </form>
-        <Modal modal={modal} setModal={setModal} modalType={modalType} />
+        <Modal modal={modal} setModal={setModal} modalType={modalType} getPreferences={getPreferences} />
       </div>
     );
   } else {
