@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
-import styles from "../styles/register.module.css";
+import styles from "../styles/Contact.module.css";
 
-const Register = () => {
+const Contact = () => {
   const [formValues, setFormValues] = useState({
     email: "",
     password1: "",
@@ -13,9 +13,7 @@ const Register = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const register = () => {
-
-  }
+  const register = () => {};
 
   return (
     <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
@@ -27,7 +25,6 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
-            autoComplete="no"
             name="email"
             placeholder="example@gmail.com"
             value={formValues.email}
@@ -39,7 +36,6 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
-            autoComplete="off"
             name="password1"
             placeholder="password"
             value={formValues.password1}
@@ -51,7 +47,6 @@ const Register = () => {
           <input
             className={styles.input}
             type="text"
-            autoComplete="off"
             name="password2"
             placeholder="password"
             value={formValues.password2}
@@ -66,4 +61,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Contact;
