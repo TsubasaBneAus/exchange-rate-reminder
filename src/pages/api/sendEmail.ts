@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
 // Send inquiry emails for users to contact
-const sendEmail = (req: NextApiRequest, res: NextApiResponse) => {
+const SendEmail = (req: NextApiRequest, res: NextApiResponse) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -31,4 +31,4 @@ const sendEmail = (req: NextApiRequest, res: NextApiResponse) => {
   transporter.sendMail(mailData);
 };
 
-export default sendEmail;
+export default SendEmail;

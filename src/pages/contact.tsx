@@ -33,6 +33,7 @@ const Contact = () => {
     });
   };
 
+
   return (
     <div>
       <form
@@ -92,7 +93,7 @@ const Contact = () => {
           </button>
         </div>
       </form>
-      <Modal modal={modal} setModal={setModal} />
+      <Modal modal={modal} setModal={setModal} modalType="Contact" />
     </div>
   );
 };
