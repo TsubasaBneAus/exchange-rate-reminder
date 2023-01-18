@@ -1,10 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Select, { SingleValue } from "react-select";
 import styles from "../styles/Selectbox.module.css";
 
 interface Props {
-  currency: string;
-  setCurrency: Dispatch<SetStateAction<string>>;
+  setCurrency: Dispatch<SetStateAction<string | null>>;
 }
 
 interface SelectedOption {
@@ -189,19 +188,14 @@ const Selectbox = (props: Props) => {
     { value: "rate_zwl", label: "ZWL: Zimbabwean Dollar" },
   ];
 
-  const handleChange = (selectedOption: SingleValue<SelectedOption>) => {
-    props.setCurrency(selectedOption!.value);
-    console.log(`Option selected: `, selectedOption);
-    console.log(`Value: ${selectedOption!.value}\n`);
-    console.log(`Label: ${selectedOption!.label}\n`);
-  };
-
   return (
     <Select
       className={styles.select}
       options={currencies}
       isSearchable={true}
-      onChange={(values: SingleValue<SelectedOption>) => handleChange(values)}
+      onChange={(selectedOption: SingleValue<SelectedOption>) => {
+        props.setCurrency(selectedOption!.value)
+      }}
     />
   );
 };
