@@ -25,12 +25,13 @@
   justify-content: center;
 }
 
-.p {
+.title {
   font-size: 30px;
   font-weight: 700;
+  margin: 20px 0;
 }
 
-.p1 {
+.contents {
   font-size: 20px;
   font-weight: 500;
 }
@@ -46,7 +47,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  padding-bottom: 20%;
+  /* padding-bottom: 20px; */
   margin: 10px 10%;
 }
 
@@ -54,4 +55,26 @@
   font-weight: 500;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.label2 {
+  color: red;
+  font-weight: 500;
+  /* margin-top: 10px; */
+  margin-bottom: 5px;
+}
+
+.button {
+  color: white;
+  background-color: rgb(45, 112, 189);
+  margin: 20px 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.3);
+}
+
+.button:hover {
+  background-color: rgb(40, 100, 168);
 }
