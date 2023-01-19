@@ -1,64 +1,241 @@
-import { ChangeEvent, useState } from "react";
-import styles from "../styles/Contact.module.css";
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-const Contact = () => {
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password1: "",
-    password2: "",
-  });
+generator client {
+  provider = "prisma-client-js"
+}
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
-  const register = () => {};
+model Account {
+  id                 Int      @id @default(autoincrement())
+  userId             Int
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  return (
-    <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
-      <h1 className={styles.title}>アカウント登録</h1>
-      <hr className={styles.bar} />
-      <div className={styles.form}>
-        <div className={styles.inputField}>
-          <label className={styles.inputLabel}>メールアドレス</label>
-          <input
-            className={styles.input}
-            type="text"
-            name="email"
-            placeholder="example@gmail.com"
-            value={formValues.email}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div className={styles.inputField}>
-          <label className={styles.inputLabel}>パスワード</label>
-          <input
-            className={styles.input}
-            type="text"
-            name="password1"
-            placeholder="password"
-            value={formValues.password1}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div className={styles.inputField}>
-          <label className={styles.inputLabel}>パスワード再入力</label>
-          <input
-            className={styles.input}
-            type="text"
-            name="password2"
-            placeholder="password"
-            value={formValues.password2}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <button className={styles.button} type="submit" onClick={register}>
-          登録
-        </button>
-      </div>
-    </form>
-  );
-};
+  @@unique([provider, providerAccountId])
+}
 
-export default Contact;
+model Session {
+  id           Int       @id @default(autoincrement())
+  sessionToken String    @unique
+  userId       Int
+  expires      DateTime
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id               Int               @id @default(autoincrement())
+  name             String?
+  email            String?           @unique
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+  userPreferences  UserPreference[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String    @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model UserPreference {
+  id                 Int      @id @default(autoincrement())
+  userId             Int
+  baseCurrency       String?
+  convertedCurrency  String?
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ExchangeRate {
+  id                Int     @id @default(autoincrement())
+  fetched_datetime  String
+  is_data_fetched   String
+  base_currency     String?
+  rate_aed          Float?
+  rate_afn          Float?
+  rate_all          Float?
+  rate_amd          Float?
+  rate_ang          Float?
+  rate_aoa          Float?
+  rate_ars          Float?
+  rate_aud          Float?
+  rate_awg          Float?
+  rate_azn          Float?
+  rate_bam          Float?
+  rate_bbd          Float?
+  rate_bdt          Float?
+  rate_bgn          Float?
+  rate_bhd          Float?
+  rate_bif          Float?
+  rate_bmd          Float?
+  rate_bnd          Float?
+  rate_bob          Float?
+  rate_brl          Float?
+  rate_bsd          Float?
+  rate_btc          Float?
+  rate_btn          Float?
+  rate_bwp          Float?
+  rate_byn          Float?
+  rate_byr          Float?
+  rate_bzd          Float?
+  rate_cad          Float?
+  rate_cdf          Float?
+  rate_chf          Float?
+  rate_clf          Float?
+  rate_clp          Float?
+  rate_cny          Float?
+  rate_cop          Float?
+  rate_crc          Float?
+  rate_cuc          Float?
+  rate_cup          Float?
+  rate_cve          Float?
+  rate_czk          Float?
+  rate_djf          Float?
+  rate_dkk          Float?
+  rate_dop          Float?
+  rate_dzd          Float?
+  rate_egp          Float?
+  rate_ern          Float?
+  rate_etb          Float?
+  rate_eur          Float?
+  rate_fjd          Float?
+  rate_fkp          Float?
+  rate_gbp          Float?
+  rate_gel          Float?
+  rate_ggp          Float?
+  rate_ghs          Float?
+  rate_gip          Float?
+  rate_gmd          Float?
+  rate_gnf          Float?
+  rate_gtq          Float?
+  rate_gyd          Float?
+  rate_hkd          Float?
+  rate_hnl          Float?
+  rate_hrk          Float?
+  rate_htg          Float?
+  rate_huf          Float?
+  rate_idr          Float?
+  rate_ils          Float?
+  rate_imp          Float?
+  rate_inr          Float?
+  rate_iqd          Float?
+  rate_irr          Float?
+  rate_isk          Float?
+  rate_jep          Float?
+  rate_jmd          Float?
+  rate_jod          Float?
+  rate_jpy          Float?
+  rate_kes          Float?
+  rate_kgs          Float?
+  rate_khr          Float?
+  rate_kmf          Float?
+  rate_kpw          Float?
+  rate_krw          Float?
+  rate_kwd          Float?
+  rate_kyd          Float?
+  rate_kzt          Float?
+  rate_lak          Float?
+  rate_lbp          Float?
+  rate_lkr          Float?
+  rate_lrd          Float?
+  rate_lsl          Float?
+  rate_ltl          Float?
+  rate_lvl          Float?
+  rate_lyd          Float?
+  rate_mad          Float?
+  rate_mdl          Float?
+  rate_mga          Float?
+  rate_mkd          Float?
+  rate_mmk          Float?
+  rate_mnt          Float?
+  rate_mop          Float?
+  rate_mro          Float?
+  rate_mur          Float?
+  rate_mvr          Float?
+  rate_mwk          Float?
+  rate_mxn          Float?
+  rate_myr          Float?
+  rate_mzn          Float?
+  rate_nad          Float?
+  rate_ngn          Float?
+  rate_nio          Float?
+  rate_nok          Float?
+  rate_npr          Float?
+  rate_nzd          Float?
+  rate_omr          Float?
+  rate_pab          Float?
+  rate_pen          Float?
+  rate_pgk          Float?
+  rate_php          Float?
+  rate_pkr          Float?
+  rate_pln          Float?
+  rate_pyg          Float?
+  rate_qar          Float?
+  rate_ron          Float?
+  rate_rsd          Float?
+  rate_rub          Float?
+  rate_rwg          Float?
+  rate_sar          Float?
+  rate_sbd          Float?
+  rate_scr          Float?
+  rate_sdg          Float?
+  rate_sek          Float?
+  rate_sgd          Float?
+  rate_shp          Float?
+  rate_sle          Float?
+  rate_sll          Float?
+  rate_sos          Float?
+  rate_srd          Float?
+  rate_std          Float?
+  rate_svc          Float?
+  rate_syp          Float?
+  rate_szl          Float?
+  rate_thb          Float?
+  rate_tjs          Float?
+  rate_tmt          Float?
+  rate_tnd          Float?
+  rate_top          Float?
+  rate_try          Float?
+  rate_ttd          Float?
+  rate_twd          Float?
+  rate_tzs          Float?
+  rate_uah          Float?
+  rate_ugx          Float?
+  rate_usd          Float?
+  rate_uyu          Float?
+  rate_uzs          Float?
+  rate_vef          Float?
+  rate_ves          Float?
+  rate_vnd          Float?
+  rate_vuv          Float?
+  rate_wst          Float?
+  rate_xaf          Float?
+  rate_xag          Float?
+  rate_xau          Float?
+  rate_xcd          Float?
+  rate_xdr          Float?
+  rate_xof          Float?
+  rate_xpf          Float?
+  rate_yer          Float?
+  rate_zar          Float?
+  rate_zmk          Float?
+  rate_zmw          Float?
+  rate_zwl          Float?
+}
