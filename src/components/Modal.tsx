@@ -6,17 +6,25 @@ interface Props {
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
   modalType: string;
+  getPreferences: () => void;
 }
 
 const Modal = (props: Props) => {
   const router = useRouter();
   const [modalText, setModalText] = useState({ p: "", button: "" });
+  const [modalAction, setModalAction] = useState("");
 
   // Handle events after clicking the button
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     props.setModal(false);
-    router.push("/");
+    
+    if (modalAction === "Go back to Home") {
+      router.push("/");
+    } else {
+      props.getPreferences();
+      router.push("/");
+    }
   };
 
   useEffect(() => {
@@ -26,6 +34,7 @@ const Modal = (props: Props) => {
           p: "設定を変更しました。",
           button: "戻る",
         });
+        setModalAction("Reload window");
         break;
 
       case "Currencies Unselected Error":
@@ -33,6 +42,7 @@ const Modal = (props: Props) => {
           p: "通貨を設定してください",
           button: "戻る",
         });
+        setModalAction("Go back to Home");
         break;
 
       case "Contact":
@@ -40,6 +50,7 @@ const Modal = (props: Props) => {
           p: "お問い合わせのメールを送信しました。",
           button: "ホームに戻る",
         });
+        setModalAction("Go back to Home");
         break;
     }
   }, [props.modalType]);
