@@ -3,13 +3,17 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Selectbox from "../components/Selectbox";
 import Modal from "../components/Modal";
+import currencies from "../lib/currencies";
 
 const Home = () => {
   const { data: session } = useSession();
   const [initialBaseCurrency, setInitialBaseCurrency] = useState("");
   const [initialConvertedCurrency, setInitialConvertedCurrency] = useState("");
+  const [exchangeRate, setExchangeRate] = useState("");
   const [baseCurrency, setBaseCurrency] = useState<string | null>(null);
-  const [convertedCurrency, setConvertedCurrency] = useState<string | null>(null);
+  const [convertedCurrency, setConvertedCurrency] = useState<string | null>(
+    null
+  );
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState("");
 
@@ -17,8 +21,19 @@ const Home = () => {
   const getPreferences = async () => {
     const response = await fetch("/api/getPreferences");
     const result = await response.json();
-    setInitialBaseCurrency(result.baseCurrency);
-    setInitialConvertedCurrency(result.convertedCurrency);
+    currencies.map((each) => {
+      if (result.baseCurrency === each.value) {
+        setInitialBaseCurrency(each.name);
+      }
+      if (result.convertedCurrency === each.value) {
+        setInitialConvertedCurrency(each.name);
+      }
+    });
+
+    // Display the current exchange rate if users have already set preference of the currencies
+    if (result.baseCurrency !== null && result.convertedCurrency !== null) {
+      setExchangeRate(result.exchangeRate);
+    }
   };
 
   useEffect(() => {
@@ -32,14 +47,17 @@ const Home = () => {
       return <h1 className={styles.title}>通貨を設定してください</h1>;
     } else {
       return (
-        <div>
+        <div className={styles.exchangeRateContainer}>
           <h1 className={styles.title}>現在の為替レート</h1>
-          <p className={styles.contents}>
-            Base Currency: {initialBaseCurrency}
-          </p>
-          <p className={styles.contents}>
-            Converted Currency: {initialConvertedCurrency}
-          </p>
+          <div className={styles.contentsContainer}>
+            <p className={styles.content1}>
+              {initialBaseCurrency} &#8594; {initialConvertedCurrency}
+            </p>
+            <p className={styles.content2}>
+              {exchangeRate} ({initialConvertedCurrency} / {initialBaseCurrency}
+              )
+            </p>
+          </div>
         </div>
       );
     }
@@ -71,30 +89,35 @@ const Home = () => {
   if (session) {
     return (
       <div className={styles.container1}>
-        <div className={styles.container3}>{showExchangeRate()}</div>
-        <form
-          className={styles.form}
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-            handleSubmit(e);
-            setModal(true);
-          }}
-        >
-          <label className={styles.label}>元となる通貨 {baseCurrency}</label>
-          <Selectbox setCurrency={setBaseCurrency} />
-          <label className={styles.label}>
-            換算後の通貨 {convertedCurrency}
-          </label>
-          <Selectbox setCurrency={setConvertedCurrency} />
-          <button className={styles.button} type="submit">
-            設定を保存
-          </button>
-        </form>
-        <Modal modal={modal} setModal={setModal} modalType={modalType} getPreferences={getPreferences} />
+        <div className={styles.container2}>
+          <div className={styles.container3}>{showExchangeRate()}</div>
+          <form
+            className={styles.form}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+              handleSubmit(e);
+              setModal(true);
+            }}
+          >
+            <label className={styles.label}>元となる通貨</label>
+            <Selectbox setCurrency={setBaseCurrency} />
+            <label className={styles.label}>換算後の通貨</label>
+            <Selectbox setCurrency={setConvertedCurrency} />
+            <button className={styles.button} type="submit">
+              設定を保存
+            </button>
+          </form>
+        </div>
+        <Modal
+          modal={modal}
+          setModal={setModal}
+          modalType={modalType}
+          getPreferences={getPreferences}
+        />
       </div>
     );
   } else {
     return (
-      <div className={styles.container2}>
+      <div className={styles.container4}>
         <h1 className={styles.explanation}>
           為替レートをメールでお知らせするアプリケーションです。
         </h1>
