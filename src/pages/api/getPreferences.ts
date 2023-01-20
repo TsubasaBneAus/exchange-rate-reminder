@@ -22,8 +22,8 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
     const userPreference = await prisma.userPreference.findUnique({
       where: { id: session.user.id },
       select: {
-        baseCurrency: true,
-        convertedCurrency: true,
+        base: true,
+        converted: true,
       },
     });
 
@@ -34,31 +34,30 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    const baseCurrency = userPreference?.baseCurrency as keyof ExchangeRate;
-    const convertedCurrency =
-      userPreference?.convertedCurrency as keyof ExchangeRate;
+    const base = userPreference?.base as keyof ExchangeRate;
+    const converted = userPreference?.converted as keyof ExchangeRate;
 
     // Check if users have already set their preferences of currencies
-    if (baseCurrency !== null || convertedCurrency !== null) {
-      const baseCurrencyValue = latestData![baseCurrency] as number;
-      const convertedCurrencyValue = latestData![convertedCurrency] as number;
-      const exchangeRate = convertedCurrencyValue / baseCurrencyValue;
+    if (base !== null && converted !== null) {
+      const baseValue = latestData![base] as number;
+      const convertedValue = latestData![converted] as number;
+      const exchangeRate = convertedValue / baseValue;
       const finalisedExchangeRate = calcExchangeRate(exchangeRate);
       res.status(200).json({
-        baseCurrency: baseCurrency,
-        convertedCurrency: convertedCurrency,
+        base: base,
+        converted: converted,
         exchangeRate: finalisedExchangeRate,
       });
     } else {
       res.status(200).json({
-        baseCurrency: null,
-        convertedCurrency: null,
+        base: null,
+        converted: null,
       });
     }
   } else {
     res.status(200).json({
-      baseCurrency: null,
-      convertedCurrency: null,
+      base: null,
+      converted: null,
     });
   }
 };

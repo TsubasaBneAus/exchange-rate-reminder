@@ -18,7 +18,7 @@ const Modal = (props: Props) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     props.setModal(false);
-    
+
     if (modalAction === "Go back to Home") {
       router.push("/");
     } else {
@@ -39,7 +39,7 @@ const Modal = (props: Props) => {
 
       case "Currencies Unselected Error":
         setModalText({
-          p: "通貨を設定してください",
+          p: "元となる通貨と換算後の通貨を設定してください",
           button: "戻る",
         });
         setModalAction("Go back to Home");

@@ -7,13 +7,11 @@ import currencies from "../lib/currencies";
 
 const Home = () => {
   const { data: session } = useSession();
-  const [initialBaseCurrency, setInitialBaseCurrency] = useState("");
-  const [initialConvertedCurrency, setInitialConvertedCurrency] = useState("");
+  const [initialBase, setInitialBase] = useState<string | null>(null);
+  const [initialConverted, setInitialConverted] = useState<string | null>(null);
   const [exchangeRate, setExchangeRate] = useState("");
-  const [baseCurrency, setBaseCurrency] = useState<string | null>(null);
-  const [convertedCurrency, setConvertedCurrency] = useState<string | null>(
-    null
-  );
+  const [base, setBase] = useState<string | null>(null);
+  const [converted, setConverted] = useState<string | null>(null);
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState("");
 
@@ -22,16 +20,16 @@ const Home = () => {
     const response = await fetch("/api/getPreferences");
     const result = await response.json();
     currencies.map((each) => {
-      if (result.baseCurrency === each.value) {
-        setInitialBaseCurrency(each.name);
+      if (result.base === each.value) {
+        setInitialBase(each.name);
       }
-      if (result.convertedCurrency === each.value) {
-        setInitialConvertedCurrency(each.name);
+      if (result.converted === each.value) {
+        setInitialConverted(each.name);
       }
     });
 
     // Display the current exchange rate if users have already set preference of the currencies
-    if (result.baseCurrency !== null && result.convertedCurrency !== null) {
+    if (result.base !== null && result.converted !== null) {
       setExchangeRate(result.exchangeRate);
     }
   };
@@ -43,7 +41,7 @@ const Home = () => {
   // Load the current user preferences of currencies
   const showExchangeRate = () => {
     // Check if users have already set the currency for the exchange rate
-    if (initialBaseCurrency === null || initialConvertedCurrency === null) {
+    if (initialBase === null || initialConverted === null) {
       return <h1 className={styles.title}>通貨を設定してください</h1>;
     } else {
       return (
@@ -51,11 +49,10 @@ const Home = () => {
           <h1 className={styles.title}>現在の為替レート</h1>
           <div className={styles.contentsContainer}>
             <p className={styles.content1}>
-              {initialBaseCurrency} &#8594; {initialConvertedCurrency}
+              {initialBase} &#8594; {initialConverted}
             </p>
             <p className={styles.content2}>
-              {exchangeRate} ({initialConvertedCurrency} / {initialBaseCurrency}
-              )
+              {exchangeRate} ({initialConverted} / {initialBase})
             </p>
           </div>
         </div>
@@ -68,15 +65,15 @@ const Home = () => {
     e.preventDefault();
 
     // Check if currencies used for the exchange rate are registered to the database
-    if (baseCurrency !== null && convertedCurrency !== null) {
+    if (base !== null && converted !== null) {
       await fetch("/api/updatePreferences", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          baseCurrency: baseCurrency,
-          convertedCurrency: convertedCurrency,
+          base: base,
+          converted: converted,
         }),
       });
       setModalType("Home");
@@ -99,9 +96,9 @@ const Home = () => {
             }}
           >
             <label className={styles.label}>元となる通貨</label>
-            <Selectbox setCurrency={setBaseCurrency} />
+            <Selectbox setCurrency={setBase} />
             <label className={styles.label}>換算後の通貨</label>
-            <Selectbox setCurrency={setConvertedCurrency} />
+            <Selectbox setCurrency={setConverted} />
             <button className={styles.button} type="submit">
               設定を保存
             </button>
