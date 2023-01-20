@@ -45,15 +45,18 @@ const Home = () => {
       return <h1 className={styles.title}>通貨を設定してください</h1>;
     } else {
       return (
-        <div className={styles.exchangeRateContainer}>
+        <div className={styles.topContainer}>
           <h1 className={styles.title}>現在の為替レート</h1>
           <div className={styles.contentsContainer}>
             <p className={styles.content1}>
               {initialBase} &#8594; {initialConverted}
             </p>
-            <p className={styles.content2}>
-              {exchangeRate} ({initialConverted} / {initialBase})
-            </p>
+            <div className={styles.rateContainer}>
+              <p className={styles.content2}>{exchangeRate}</p>
+              <p className={styles.content3}>
+                ({initialConverted} / {initialBase})
+              </p>
+            </div>
           </div>
         </div>
       );
