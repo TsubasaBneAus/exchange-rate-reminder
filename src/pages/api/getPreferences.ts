@@ -16,7 +16,7 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
     return exchangeRate;
   };
 
-  // Check if users have already logged in
+  // Check if users have already signed up or logged in
   if (session) {
     // Fetch currency data user set as preference
     const userPreference = await prisma.userPreference.findUnique({

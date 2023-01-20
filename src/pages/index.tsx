@@ -85,7 +85,7 @@ const Home = () => {
     }
   };
 
-  // Check if users have already logged in
+  // Check if users have already signed up or logged in
   if (session) {
     return (
       <div className={styles.container1}>

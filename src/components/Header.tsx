@@ -5,7 +5,7 @@ import styles from "../styles/Header.module.css";
 const Header = () => {
   const { data: session } = useSession();
   const navbar = () => {
-    // Check if users have already logged in
+    // Check if users have already signed up or logged in
     if (session) {
       return (
         <ul className={styles.ul}>
