@@ -1,13 +1,21 @@
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const MyPage = () => {
   const { data: session } = useSession();
 
-  // Check if users have already logged in
+  useEffect(() => {
+    // Redirect to sign in page if users have not signed in or logged in yet
+    if (!session) {
+      signIn("google", { callbackUrl: "/" });
+    }
+  }, [session])
+
+  // Check if users have already signed up or logged in
   if (session) {
     return <h1>マイページ</h1>;
   } else {
-    return <h1>アカウント登録またはログインしてください</h1>;
+    return null;
   }
 };
 
