@@ -10,6 +10,7 @@ const Contact = () => {
   });
 
   const [modal, setModal] = useState(false);
+  const [modalType, setModalType] = useState("");
 
   // Handle user inputs of the form
   const handleChange = (
@@ -33,13 +34,13 @@ const Contact = () => {
     });
   };
 
-
   return (
     <div>
       <form
         className={styles.formContainer}
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           handleSubmit(e);
+          setModalType("Contact");
           setModal(true);
         }}
       >
@@ -93,7 +94,12 @@ const Contact = () => {
           </button>
         </div>
       </form>
-      <Modal modal={modal} setModal={setModal} modalType="Contact" />
+      <Modal
+        modal={modal}
+        setModal={setModal}
+        modalType={modalType}
+        setModalType={setModalType}
+      />
     </div>
   );
 };

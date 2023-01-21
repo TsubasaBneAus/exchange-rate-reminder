@@ -90,7 +90,7 @@ const Home = () => {
     return (
       <div className={styles.container1}>
         <div className={styles.container2}>
-          <div className={styles.container3}>{showExchangeRate()}</div>
+          {showExchangeRate()}
           <form
             className={styles.form}
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -111,6 +111,7 @@ const Home = () => {
           modal={modal}
           setModal={setModal}
           modalType={modalType}
+          setModalType={setModalType}
           getPreferences={getPreferences}
         />
       </div>

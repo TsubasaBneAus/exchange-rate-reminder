@@ -20,7 +20,9 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
   if (session) {
     // Fetch currency data user set as preference
     const userPreference = await prisma.userPreference.findUnique({
-      where: { id: session.user.id },
+      where: {
+        id: session.user.id,
+      },
       select: {
         base: true,
         converted: true,
@@ -54,11 +56,6 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
         converted: null,
       });
     }
-  } else {
-    res.status(200).json({
-      base: null,
-      converted: null,
-    });
   }
 };
 
