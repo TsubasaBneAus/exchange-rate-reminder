@@ -10,8 +10,8 @@ const UpdatePreferences = async (req: NextApiRequest, res: NextApiResponse) => {
       id: session?.user.id,
     },
     data: {
-      baseCurrency: req.body.baseCurrency,
-      convertedCurrency: req.body.convertedCurrency,
+      base: req.body.base,
+      converted: req.body.converted,
     },
   });
   res.status(200).json(result);

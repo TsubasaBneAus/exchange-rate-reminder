@@ -58,8 +58,8 @@ model VerificationToken {
 model UserPreference {
   id                 Int      @id @default(autoincrement())
   userId             Int
-  baseCurrency       String?
-  convertedCurrency  String?
+  base               String?
+  converted          String?
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
