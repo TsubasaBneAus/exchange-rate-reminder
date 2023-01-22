@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 import Selectbox from "../components/Selectbox";
 import Modal from "../components/Modal";
 import currencies from "../lib/currencies";
+import { GetServerSideProps, GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
+
 
 const Home = () => {
+  const { t } = useTranslation("");
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
@@ -119,11 +124,13 @@ const Home = () => {
   } else {
     return (
       <div className={styles.container4}>
-        <h1 className={styles.explanation}>
-          為替レートをメールでお知らせするアプリケーションです。
+        <h1 className={styles.explanation} suppressHydrationWarning>
+          {/* 為替レートをメールでお知らせするアプリケーションです。 */}
+          {t("header.MyPage")}
         </h1>
-        <h1 className={styles.explanation}>
-          海外送金するタイミングやFXのために為替チャートを逐一確認するのが面倒な方へ！
+        <h1 className={styles.explanation} suppressHydrationWarning>
+          {/* 海外送金するタイミングやFXのために為替チャートを逐一確認するのが面倒な方へ！ */}
+          {t("header.Contact")}
         </h1>
       </div>
     );
@@ -131,3 +138,11 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ["common"])),
+    },
+  };
+};

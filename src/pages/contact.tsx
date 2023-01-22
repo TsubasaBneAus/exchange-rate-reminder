@@ -35,7 +35,7 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <>
       <form
         className={styles.formContainer}
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -100,7 +100,7 @@ const Contact = () => {
         modalType={modalType}
         setModalType={setModalType}
       />
-    </div>
+    </>
   );
 };
 

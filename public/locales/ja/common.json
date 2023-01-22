@@ -1,0 +1,16 @@
+{
+  "header": {
+    "MyPage": "マイページ",
+    "Contact": "お問い合わせ",
+    "Sign Up or Login": "登録・ログイン",
+    "Logout": "ログアウト"
+  },
+  "home": {
+    "Home title": "ホームタイトル",
+    "Home description": "ホーム説明"
+  },
+  "about": {
+    "About title": "アバウトタイトル",
+    "About description": "アバウト説明"
+  }
+}
