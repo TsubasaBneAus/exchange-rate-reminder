@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Selectbox from "../components/Selectbox";
 import Modal from "../components/Modal";
 import currencies from "../lib/currencies";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
@@ -47,11 +47,11 @@ const Home = () => {
   const showExchangeRate = () => {
     // Check if users have already set the currency for the exchange rate
     if (initialBase === null || initialConverted === null) {
-      return <h1 className={styles.title}>通貨を設定してください</h1>;
+      return <h1 className={styles.title}>{t('Home.Title1')}</h1>;
     } else {
       return (
         <div className={styles.topContainer}>
-          <h1 className={styles.title}>現在の為替レート</h1>
+          <h1 className={styles.title}>{t('Home.Title2')}</h1>
           <div className={styles.contentsContainer}>
             <p className={styles.content1}>
               {initialBase} &#8594; {initialConverted}
@@ -103,12 +103,12 @@ const Home = () => {
               setModal(true);
             }}
           >
-            <label className={styles.label}>元となる通貨</label>
+            <label className={styles.label}>{t('Home.Label1')}</label>
             <Selectbox setCurrency={setBase} />
-            <label className={styles.label}>換算後の通貨</label>
+            <label className={styles.label}>{t('Home.Label2')}</label>
             <Selectbox setCurrency={setConverted} />
             <button className={styles.button} type="submit">
-              設定を保存
+              {t('Home.Button')}
             </button>
           </form>
         </div>
@@ -124,13 +124,11 @@ const Home = () => {
   } else {
     return (
       <div className={styles.container4}>
-        <h1 className={styles.explanation} suppressHydrationWarning>
-          {/* 為替レートをメールでお知らせするアプリケーションです。 */}
-          {t("header.MyPage")}
+        <h1 className={styles.description} suppressHydrationWarning>
+          {t("Home.Description1")}
         </h1>
-        <h1 className={styles.explanation} suppressHydrationWarning>
-          {/* 海外送金するタイミングやFXのために為替チャートを逐一確認するのが面倒な方へ！ */}
-          {t("header.Contact")}
+        <h1 className={styles.description} suppressHydrationWarning>
+          {t("Home.Description2")}
         </h1>
       </div>
     );

@@ -1,8 +1,12 @@
+import { GetServerSideProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "../components/Modal";
 import styles from "../styles/Contact.module.css";
 
 const Contact = () => {
+  const { t } = useTranslation("");
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -44,16 +48,16 @@ const Contact = () => {
           setModal(true);
         }}
       >
-        <h1 className={styles.title}>お問い合わせ</h1>
+        <h1 className={styles.title}>{t("Contact.Title")}</h1>
         <hr className={styles.bar} />
         <div className={styles.form}>
           <div className={styles.inputField}>
-            <label className={styles.inputLabel}>お名前</label>
+            <label className={styles.inputLabel}>{t("Contact.Label1")}</label>
             <input
               className={styles.input}
               type="text"
               name="name"
-              placeholder="Your Name"
+              placeholder={t("Contact.Placeholder1")!}
               value={formValues.name}
               required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -62,12 +66,12 @@ const Contact = () => {
             />
           </div>
           <div className={styles.inputField}>
-            <label className={styles.inputLabel}>メールアドレス</label>
+            <label className={styles.inputLabel}>{t("Contact.Label2")}</label>
             <input
               className={styles.input}
               type="text"
               name="email"
-              placeholder="example@gmail.com"
+              placeholder={t("Contact.Placeholder2")!}
               value={formValues.email}
               required
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -76,11 +80,11 @@ const Contact = () => {
             />
           </div>
           <div className={styles.inputField}>
-            <label className={styles.inputLabel}>メッセージ</label>
+            <label className={styles.inputLabel}>{t("Contact.Label3")}</label>
             <textarea
               className={styles.input}
               name="message"
-              placeholder="Enter your message"
+              placeholder={t("Contact.Placeholder3")!}
               value={formValues.message}
               rows={10}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -90,7 +94,7 @@ const Contact = () => {
             />
           </div>
           <button className={styles.button} type="submit">
-            送信
+            {t("Contact.Button")}
           </button>
         </div>
       </form>
@@ -105,3 +109,11 @@ const Contact = () => {
 };
 
 export default Contact;
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ["common"])),
+    },
+  };
+};

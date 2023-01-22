@@ -1,10 +1,9 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-// import { useState } from "react";
 // import Select, { SingleValue } from "react-select";
 import styles from "../styles/Header.module.css";
 import { useTranslation } from "next-i18next";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // interface SelectedOption {
@@ -32,25 +31,20 @@ const Header = () => {
               href="/mypage"
               suppressHydrationWarning
             >
-              {t("header.MyPage")}
+              {t("Header.MyPage")}
             </Link>
           </li>
           <li className={styles.li}>
-            <Link
-              className={styles.link}
-              href="/contact"
-              suppressHydrationWarning
-            >
-              {t("header.Contact")}
+            <Link className={styles.link} href="/contact">
+              {t("Header.Contact")}
             </Link>
           </li>
           <li className={styles.li}>
             <button
               className={styles.button}
               onClick={() => signOut({ callbackUrl: "/" })}
-              suppressHydrationWarning
             >
-              {t("header.Logout")}
+              {t("Header.SignOut")}
             </button>
           </li>
         </>
@@ -62,18 +56,13 @@ const Header = () => {
             <button
               className={styles.button}
               onClick={() => signIn("google", { callbackUrl: "/" })}
-              suppressHydrationWarning
             >
-              {t("header.Sign Up or Login")}
+              {t("Header.SignIn")}
             </button>
           </li>
           <li className={styles.li}>
-            <Link
-              className={styles.link}
-              href="/contact"
-              suppressHydrationWarning
-            >
-              {t("header.Contact")}
+            <Link className={styles.link} href="/contact">
+              {t("Header.Contact")}
             </Link>
           </li>
         </>

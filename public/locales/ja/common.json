@@ -1,16 +1,27 @@
 {
-  "header": {
+  "Header": {
     "MyPage": "マイページ",
     "Contact": "お問い合わせ",
-    "Sign Up or Login": "登録・ログイン",
-    "Logout": "ログアウト"
+    "SignIn": "登録・ログイン",
+    "SignOut": "ログアウト"
   },
-  "home": {
-    "Home title": "ホームタイトル",
-    "Home description": "ホーム説明"
+  "Home": {
+    "Description1": "為替レートをメールでお知らせするアプリケーションです",
+    "Description2": "海外送金するタイミングやFXのために為替チャートを逐一確認するのが面倒な方へ！",
+    "Title1": "通貨を設定してください",
+    "Title2": "現在の為替レート",
+    "Label1": "元となる通貨",
+    "Label2": "換算後の通貨",
+    "Button": "設定を保存"
   },
-  "about": {
-    "About title": "アバウトタイトル",
-    "About description": "アバウト説明"
+  "Contact": {
+    "Title": "お問い合わせ",
+    "Label1": "お名前",
+    "Placeholder1": "名前を入力してください",
+    "Label2": "メールアドレス",
+    "Placeholder2": "メールアドレスを入力してください",
+    "Label3": "メッセージ",
+    "Placeholder3": "メッセージを入力してください",
+    "Button": "送信"
   }
 }
