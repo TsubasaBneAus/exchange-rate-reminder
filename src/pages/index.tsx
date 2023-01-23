@@ -8,7 +8,6 @@ import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
-
 const Home = () => {
   const { t } = useTranslation("");
   const { data: session } = useSession();
@@ -47,16 +46,16 @@ const Home = () => {
   const showExchangeRate = () => {
     // Check if users have already set the currency for the exchange rate
     if (initialBase === null || initialConverted === null) {
-      return <h1 className={styles.title}>{t('Home.Title1')}</h1>;
+      return <h1 className={styles.title}>{t("Home.Title1")}</h1>;
     } else {
       return (
-        <div className={styles.topContainer}>
-          <h1 className={styles.title}>{t('Home.Title2')}</h1>
-          <div className={styles.contentsContainer}>
+        <div className={styles.container3}>
+          <h1 className={styles.title}>{t("Home.Title2")}</h1>
+          <div className={styles.container4}>
             <p className={styles.content1}>
               {initialBase} &#8594; {initialConverted}
             </p>
-            <div className={styles.rateContainer}>
+            <div className={styles.container5}>
               <p className={styles.content2}>{exchangeRate}</p>
               <p className={styles.content3}>
                 ({initialConverted} / {initialBase})
@@ -103,12 +102,12 @@ const Home = () => {
               setModal(true);
             }}
           >
-            <label className={styles.label}>{t('Home.Label1')}</label>
+            <label className={styles.label}>{t("Home.Label1")}</label>
             <Selectbox setCurrency={setBase} />
-            <label className={styles.label}>{t('Home.Label2')}</label>
+            <label className={styles.label}>{t("Home.Label2")}</label>
             <Selectbox setCurrency={setConverted} />
             <button className={styles.button} type="submit">
-              {t('Home.Button')}
+              {t("Home.Button")}
             </button>
           </form>
         </div>
@@ -116,14 +115,13 @@ const Home = () => {
           modal={modal}
           setModal={setModal}
           modalType={modalType}
-          setModalType={setModalType}
           getPreferences={getPreferences}
         />
       </div>
     );
   } else {
     return (
-      <div className={styles.container4}>
+      <div className={styles.container6}>
         <h1 className={styles.description} suppressHydrationWarning>
           {t("Home.Description1")}
         </h1>
