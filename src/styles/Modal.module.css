@@ -13,7 +13,7 @@
 
 .content {
   background: white;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.6);
   max-width: 500px;
@@ -28,8 +28,10 @@
 
 .sentence {
   color: black;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .button {
@@ -48,4 +50,10 @@
 
 .button:hover {
   background-color: rgb(40, 100, 168);
+}
+
+@media screen and (max-width: 700px) {
+  .content {
+    width: 100%;
+  }
 }

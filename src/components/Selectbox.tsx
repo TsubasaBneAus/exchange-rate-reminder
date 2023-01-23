@@ -17,7 +17,7 @@ const Selectbox = (props: Props) => {
   const formattedOptions = currencies.map((each) => {
     const formattedLabel = `${each.name}: ${each.label}`;
     return { value: each.value, label: formattedLabel };
-  })
+  });
   return (
     <Select
       className={styles.select}

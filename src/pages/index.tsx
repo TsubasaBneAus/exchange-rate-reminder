@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 import Selectbox from "../components/Selectbox";
 import Modal from "../components/Modal";
 import currencies from "../lib/currencies";
+import { GetServerSideProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+  const { t } = useTranslation("");
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
@@ -42,16 +46,16 @@ const Home = () => {
   const showExchangeRate = () => {
     // Check if users have already set the currency for the exchange rate
     if (initialBase === null || initialConverted === null) {
-      return <h1 className={styles.title}>通貨を設定してください</h1>;
+      return <h1 className={styles.title}>{t("Home.Title1")}</h1>;
     } else {
       return (
-        <div className={styles.topContainer}>
-          <h1 className={styles.title}>現在の為替レート</h1>
-          <div className={styles.contentsContainer}>
+        <div className={styles.container3}>
+          <h1 className={styles.title}>{t("Home.Title2")}</h1>
+          <div className={styles.container4}>
             <p className={styles.content1}>
               {initialBase} &#8594; {initialConverted}
             </p>
-            <div className={styles.rateContainer}>
+            <div className={styles.container5}>
               <p className={styles.content2}>{exchangeRate}</p>
               <p className={styles.content3}>
                 ({initialConverted} / {initialBase})
@@ -98,12 +102,12 @@ const Home = () => {
               setModal(true);
             }}
           >
-            <label className={styles.label}>元となる通貨</label>
+            <label className={styles.label}>{t("Home.Label1")}</label>
             <Selectbox setCurrency={setBase} />
-            <label className={styles.label}>換算後の通貨</label>
+            <label className={styles.label}>{t("Home.Label2")}</label>
             <Selectbox setCurrency={setConverted} />
             <button className={styles.button} type="submit">
-              設定を保存
+              {t("Home.Button")}
             </button>
           </form>
         </div>
@@ -111,19 +115,18 @@ const Home = () => {
           modal={modal}
           setModal={setModal}
           modalType={modalType}
-          setModalType={setModalType}
           getPreferences={getPreferences}
         />
       </div>
     );
   } else {
     return (
-      <div className={styles.container4}>
-        <h1 className={styles.explanation}>
-          為替レートをメールでお知らせするアプリケーションです。
+      <div className={styles.container6}>
+        <h1 className={styles.description} suppressHydrationWarning>
+          {t("Home.Description1")}
         </h1>
-        <h1 className={styles.explanation}>
-          海外送金するタイミングやFXのために為替チャートを逐一確認するのが面倒な方へ！
+        <h1 className={styles.description} suppressHydrationWarning>
+          {t("Home.Description2")}
         </h1>
       </div>
     );
@@ -131,3 +134,11 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ["common"])),
+    },
+  };
+};

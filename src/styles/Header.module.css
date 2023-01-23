@@ -8,8 +8,16 @@
   height: 52px;
 }
 
+.ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .li {
   display: inline-block;
+  list-style-type: none;
 }
 
 .title {
@@ -51,12 +59,12 @@
   }
 
   .ul {
-    padding-bottom: 5px;
     padding-left: 0px;
     margin: 0;
   }
 
-  .link, .button {
+  .link,
+  .button {
     font-size: 16px;
   }
 }

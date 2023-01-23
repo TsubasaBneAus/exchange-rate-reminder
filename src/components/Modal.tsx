@@ -1,13 +1,15 @@
+import { GetServerSideProps } from "next";
 import { signOut } from "next-auth/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "../styles/Modal.module.css";
 
 interface Props {
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
   modalType: string;
-  setModalType: Dispatch<SetStateAction<string>>; // なぜかprops.setModalTypeで呼び出すと使えない
   getPreferences?: () => void;
 }
 
@@ -23,6 +25,7 @@ interface ModalAction {
 }
 
 const Modal = (props: Props) => {
+  const { t, i18n } = useTranslation("");
   const router = useRouter();
   const [modalType, setModalType] = useState<string | null>(null);
   const [modalText, setModalText] = useState<ModalText>({
@@ -49,7 +52,7 @@ const Modal = (props: Props) => {
         router.push("/");
         break;
 
-      case "Go back Home":
+      case "Back to Home":
         props.setModal(false);
         router.push("/");
         break;
@@ -62,7 +65,7 @@ const Modal = (props: Props) => {
       case "Reload the window":
         props.setModal(false);
         signOut({
-          callbackUrl: "/",
+          callbackUrl: `/${i18n.language}`,
         });
         break;
     }
@@ -96,8 +99,8 @@ const Modal = (props: Props) => {
     switch (props.modalType) {
       case "Home":
         setModalText({
-          text: "設定を変更しました。",
-          button1: "戻る",
+          text: t("Modal.Text1"),
+          button1: t("Modal.Button1"),
           button2: null,
         });
         setModalAction({ button1: "Refetch the data", button2: null });
@@ -105,27 +108,27 @@ const Modal = (props: Props) => {
 
       case "Currencies Unselected Error":
         setModalText({
-          text: "元となる通貨と換算後の通貨を設定してください",
-          button1: "戻る",
+          text: t("Modal.Text2"),
+          button1: t("Modal.Button1"),
           button2: null,
         });
-        setModalAction({ button1: "Go back Home", button2: null });
+        setModalAction({ button1: "Back to Home", button2: null });
         break;
 
       case "Contact":
         setModalText({
-          text: "お問い合わせのメールを送信しました。",
-          button1: "ホームに戻る",
+          text: t("Modal.Text3"),
+          button1: t("Modal.Button2"),
           button2: null,
         });
-        setModalAction({ button1: "Go back Home", button2: null });
+        setModalAction({ button1: "Back to Home", button2: null });
         break;
 
       case "MyPage":
         setModalText({
-          text: "本当に削除しますか？",
-          button1: "はい",
-          button2: "いいえ",
+          text: t("Modal.Text4"),
+          button1: t("Modal.Button3"),
+          button2: t("Modal.Button4"),
         });
         setModalAction({
           button1: "Remove an account",
@@ -136,13 +139,13 @@ const Modal = (props: Props) => {
 
     if (modalType === "Account Removed") {
       setModalText({
-        text: "アカウントは削除されました。",
-        button1: "ホームに戻る",
+        text: t("Modal.Text5"),
+        button1: t("Modal.Button2"),
         button2: null,
       });
       setModalAction({ button1: "Reload the window", button2: null });
     }
-  }, [props.modalType, modalType]);
+  }, [props.modalType, modalType, t]);
 
   if (props.modal) {
     return (
@@ -167,3 +170,11 @@ const Modal = (props: Props) => {
 };
 
 export default Modal;
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ["common"])),
+    },
+  };
+};
