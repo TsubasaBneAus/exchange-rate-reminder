@@ -1,27 +1,42 @@
 {
   "Header": {
-    "MyPage": "マイページ",
-    "Contact": "お問い合わせ",
-    "SignIn": "登録・ログイン",
-    "SignOut": "ログアウト"
+    "MyPage": "My Page",
+    "Contact": "Contact Us",
+    "SignIn": "Sign Up / Login",
+    "SignOut": "Logout"
   },
   "Home": {
-    "Description1": "為替レートをメールでお知らせするアプリケーションです",
-    "Description2": "海外送金するタイミングやFXのために為替チャートを逐一確認するのが面倒な方へ！",
-    "Title1": "通貨を設定してください",
-    "Title2": "現在の為替レート",
-    "Label1": "元となる通貨",
-    "Label2": "換算後の通貨",
-    "Button": "設定を保存"
+    "Description1": "This application let you know the exchange rate by email",
+    "Description2": "To all people who feel bothered to check the exchange rate chart all the time for the timing of international money transfer or FX",
+    "Title1": "Set the currencies",
+    "Title2": "The current exchange rate",
+    "Label1": "Base Currency",
+    "Label2": "Converted Currency",
+    "Button": "Save the settings"
   },
   "Contact": {
-    "Title": "お問い合わせ",
-    "Label1": "お名前",
-    "Placeholder1": "名前を入力してください",
-    "Label2": "メールアドレス",
-    "Placeholder2": "メールアドレスを入力してください",
-    "Label3": "メッセージ",
-    "Placeholder3": "メッセージを入力してください",
-    "Button": "送信"
+    "Title": "Inquiry",
+    "Label1": "Your Name",
+    "Label2": "Email Address",
+    "Label3": "Message",
+    "Placeholder1": "Enter your name",
+    "Placeholder2": "Enter your email address",
+    "Placeholder3": "Enter your message",
+    "Button": "Send"
+  },
+  "MyPage": {
+    "Title": "My Page",
+    "Button": "Delete your account"
+  },
+  "Modal": {
+    "Text1": "The settings has been saved!",
+    "Text2": "Set base and converted currencies!",
+    "Text3": "The inquiry email has been sent!",
+    "Text4": "Are you sure to delete your account?",
+    "Text5": "Your account has been deleted!",
+    "Button1": "Back",
+    "Button2": "Back to Home",
+    "Button3": "Yes",
+    "Button4": "No"
   }
 }

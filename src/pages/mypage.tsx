@@ -1,9 +1,13 @@
+import { GetServerSideProps } from "next";
 import { signIn, useSession } from "next-auth/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "../components/Modal";
 import styles from "../styles/MyPage.module.css";
 
 const MyPage = () => {
+  const { t } = useTranslation("");
   const { data: session } = useSession();
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState("");
@@ -16,7 +20,7 @@ const MyPage = () => {
   }, [session]);
 
   const handleChange = () => {
-    setModalType("MyPage")
+    setModalType("MyPage");
     setModal(true);
   };
 
@@ -24,9 +28,9 @@ const MyPage = () => {
   if (session) {
     return (
       <div className={styles.formContainer}>
-        <h1 className={styles.title}>マイページ</h1>
+        <h1 className={styles.title}>{t("MyPage.Title")}</h1>
         <button className={styles.button} onClick={() => handleChange()}>
-          アカウントを削除する
+          {t("MyPage.Button")}
         </button>
         <Modal modal={modal} setModal={setModal} modalType={modalType} />
       </div>
@@ -37,3 +41,11 @@ const MyPage = () => {
 };
 
 export default MyPage;
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ["common"])),
+    },
+  };
+};

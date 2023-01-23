@@ -98,12 +98,7 @@ const Contact = () => {
           </button>
         </div>
       </form>
-      <Modal
-        modal={modal}
-        setModal={setModal}
-        modalType={modalType}
-        setModalType={setModalType}
-      />
+      <Modal modal={modal} setModal={setModal} modalType={modalType} />
     </>
   );
 };
