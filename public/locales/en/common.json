@@ -38,5 +38,9 @@
     "Button2": "Back to Home",
     "Button3": "Yes",
     "Button4": "No"
+  },
+  "LanguageMenu": {
+    "Item1": "English",
+    "Item2": "Japanese"
   }
 }

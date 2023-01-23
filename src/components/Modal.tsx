@@ -25,7 +25,7 @@ interface ModalAction {
 }
 
 const Modal = (props: Props) => {
-  const { t } = useTranslation("");
+  const { t, i18n } = useTranslation("");
   const router = useRouter();
   const [modalType, setModalType] = useState<string | null>(null);
   const [modalText, setModalText] = useState<ModalText>({
@@ -65,7 +65,7 @@ const Modal = (props: Props) => {
       case "Reload the window":
         props.setModal(false);
         signOut({
-          callbackUrl: "/",
+          callbackUrl: `/${i18n.language}`,
         });
         break;
     }

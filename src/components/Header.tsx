@@ -1,25 +1,16 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-// import Select, { SingleValue } from "react-select";
 import styles from "../styles/Header.module.css";
 import { useTranslation } from "next-i18next";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-// interface SelectedOption {
-//   value: string;
-//   label: string;
-// }
+import LanguageMenu from "./LanguageMenu";
 
 const Header = () => {
-  const { t } = useTranslation("");
+  const { t, i18n } = useTranslation("");
   const { data: session } = useSession();
-  // const [language, setLanguage] = useState("japanese");
-  // const options = [
-  //   { value: "english", label: "English" },
-  //   { value: "japanese", label: "Japanese" },
-  // ];
 
+  // Change the contents of the navigation bar according to the user session
   const navbar = () => {
     // Check if users have already signed up or logged in
     if (session) {
@@ -42,7 +33,7 @@ const Header = () => {
           <li className={styles.li}>
             <button
               className={styles.button}
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() => signOut({ callbackUrl: `/${i18n.language}` })}
             >
               {t("Header.SignOut")}
             </button>
@@ -55,7 +46,9 @@ const Header = () => {
           <li className={styles.li}>
             <button
               className={styles.button}
-              onClick={() => signIn("google", { callbackUrl: "/" })}
+              onClick={() =>
+                signIn("google", { callbackUrl: `/${i18n.language}` })
+              }
             >
               {t("Header.SignIn")}
             </button>
@@ -78,12 +71,9 @@ const Header = () => {
       <nav>
         <ul className={styles.ul}>
           {navbar()}
-          {/* <Select
-            options={options}
-            onChange={(selectedOption: SingleValue<SelectedOption>) => {
-              setLanguage(selectedOption!.value);
-            }}
-          /> */}
+          <li className={styles.li}>
+            <LanguageMenu />
+          </li>
         </ul>
       </nav>
     </header>

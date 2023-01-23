@@ -38,5 +38,9 @@
     "Button2": "ホームに戻る",
     "Button3": "はい",
     "Button4": "いいえ"
+  },
+  "LanguageMenu": {
+    "Item1": "英語",
+    "Item2": "日本語"
   }
 }
