@@ -26,7 +26,6 @@ model Account {
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("account")
 }
 
 model Session {
@@ -35,8 +34,6 @@ model Session {
   userId       Int
   expires      DateTime
   user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("session")
 }
 
 model User {
@@ -48,8 +45,6 @@ model User {
   accounts         Account[]
   sessions         Session[]
   userPreferences  UserPreference[]
-
-  @@map("user")
 }
 
 model VerificationToken {
@@ -58,7 +53,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map("verificationtoken")
 }
 
 model UserPreference {
@@ -68,8 +62,6 @@ model UserPreference {
   base               String?
   converted          String?
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("userpreference")
 }
 
 model ExchangeRate {
@@ -247,6 +239,4 @@ model ExchangeRate {
   rate_zmk          Float?
   rate_zmw          Float?
   rate_zwl          Float?
-
-  @@map("exchangerate")
 }
