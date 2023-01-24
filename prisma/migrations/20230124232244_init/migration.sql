@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `account` (
+CREATE TABLE `Account` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `type` VARCHAR(191) NOT NULL,
@@ -13,45 +13,45 @@ CREATE TABLE `account` (
     `id_token` TEXT NULL,
     `session_state` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `account_provider_providerAccountId_key`(`provider`, `providerAccountId`),
+    UNIQUE INDEX `Account_provider_providerAccountId_key`(`provider`, `providerAccountId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `session` (
+CREATE TABLE `Session` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `sessionToken` VARCHAR(191) NOT NULL,
     `userId` INTEGER NOT NULL,
     `expires` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `session_sessionToken_key`(`sessionToken`),
+    UNIQUE INDEX `Session_sessionToken_key`(`sessionToken`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `user` (
+CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NULL,
     `email` VARCHAR(191) NULL,
     `emailVerified` DATETIME(3) NULL,
     `image` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `user_email_key`(`email`),
+    UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `verificationtoken` (
+CREATE TABLE `VerificationToken` (
     `identifier` VARCHAR(191) NOT NULL,
     `token` VARCHAR(191) NOT NULL,
     `expires` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `verificationtoken_token_key`(`token`),
-    UNIQUE INDEX `verificationtoken_identifier_token_key`(`identifier`, `token`)
+    UNIQUE INDEX `VerificationToken_token_key`(`token`),
+    UNIQUE INDEX `VerificationToken_identifier_token_key`(`identifier`, `token`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `userpreference` (
+CREATE TABLE `UserPreference` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `language` VARCHAR(191) NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `userpreference` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `exchangerate` (
+CREATE TABLE `ExchangeRate` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `fetched_datetime` VARCHAR(191) NOT NULL,
     `is_data_fetched` VARCHAR(191) NOT NULL,
@@ -242,10 +242,10 @@ CREATE TABLE `exchangerate` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `account` ADD CONSTRAINT `account_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Account` ADD CONSTRAINT `Account_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `session` ADD CONSTRAINT `session_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `userpreference` ADD CONSTRAINT `userpreference_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `UserPreference` ADD CONSTRAINT `UserPreference_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
