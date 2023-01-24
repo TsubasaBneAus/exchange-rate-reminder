@@ -6,12 +6,10 @@ import React, { useState } from "react";
 import styles from "../styles/LanguageMenu.module.css";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
 import languages from "../lib/languages";
 import { useRouter } from "next/router";
 
 const LanguageMenu = () => {
-  const { t } = useTranslation("");
   const router = useRouter();
   const { pathname, asPath, query } = router;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -56,10 +54,10 @@ const LanguageMenu = () => {
         }}
       >
         <MenuItem onClick={() => handleClose(1)} disableRipple>
-          {t("LanguageMenu.Item1")}
+          English
         </MenuItem>
         <MenuItem onClick={() => handleClose(2)} disableRipple>
-          {t("LanguageMenu.Item2")}
+          日本語
         </MenuItem>
       </Menu>
     </>
