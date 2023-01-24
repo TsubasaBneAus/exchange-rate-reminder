@@ -9,7 +9,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
-  const { t } = useTranslation("");
+  const { t, i18n } = useTranslation("");
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
@@ -79,6 +79,7 @@ const Home = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          language: i18n.language,
           base: base,
           converted: converted,
         }),

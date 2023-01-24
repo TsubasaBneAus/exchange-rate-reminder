@@ -10,6 +10,7 @@ const UpdatePreferences = async (req: NextApiRequest, res: NextApiResponse) => {
       id: session?.user.id,
     },
     data: {
+      language: req.body.language,
       base: req.body.base,
       converted: req.body.converted,
     },
