@@ -13,7 +13,7 @@ password = os.environ["PASSWORD"]
 database = os.environ["DATABASE"]
 db_config = (host, user, password, database)
 
-# Fetch exchange rate data
+# Fetch the exchange rate data
 apikey = os.environ["API_KEY"]
 base_currency = "JPY"
 url = f"https://api.apilayer.com/exchangerates_data/latest?base={base_currency}"
