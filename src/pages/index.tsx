@@ -110,6 +110,7 @@ const Home = () => {
               {t("Home.Button")}
             </button>
           </form>
+          <p className={styles.description2}>{t("Home.Description3")}</p>
         </div>
         <Modal
           modal={modal}
@@ -122,10 +123,10 @@ const Home = () => {
   } else {
     return (
       <div className={styles.container6}>
-        <h1 className={styles.description} suppressHydrationWarning>
+        <h1 className={styles.description1} suppressHydrationWarning>
           {t("Home.Description1")}
         </h1>
-        <h1 className={styles.description} suppressHydrationWarning>
+        <h1 className={styles.description1} suppressHydrationWarning>
           {t("Home.Description2")}
         </h1>
       </div>
