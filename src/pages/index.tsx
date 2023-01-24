@@ -9,7 +9,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
-  const { t } = useTranslation("");
+  const { t, i18n } = useTranslation("");
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
@@ -79,6 +79,7 @@ const Home = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          language: i18n.language,
           base: base,
           converted: converted,
         }),
@@ -110,6 +111,7 @@ const Home = () => {
               {t("Home.Button")}
             </button>
           </form>
+          <p className={styles.description2}>{t("Home.Description3")}</p>
         </div>
         <Modal
           modal={modal}
@@ -122,10 +124,10 @@ const Home = () => {
   } else {
     return (
       <div className={styles.container6}>
-        <h1 className={styles.description} suppressHydrationWarning>
+        <h1 className={styles.description1} suppressHydrationWarning>
           {t("Home.Description1")}
         </h1>
-        <h1 className={styles.description} suppressHydrationWarning>
+        <h1 className={styles.description1} suppressHydrationWarning>
           {t("Home.Description2")}
         </h1>
       </div>

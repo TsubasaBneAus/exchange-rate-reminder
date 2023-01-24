@@ -58,6 +58,7 @@ model VerificationToken {
 model UserPreference {
   id                 Int      @id @default(autoincrement())
   userId             Int
+  language           String?
   base               String?
   converted          String?
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
