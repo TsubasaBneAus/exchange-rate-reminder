@@ -10,9 +10,3 @@
     min-height: -webkit-fill-available;
   }
 }
-
-@media screen and (max-width: 700px) and (orientation: landscape) {
-  .container {
-    overflow: hidden;
-  }
-}
