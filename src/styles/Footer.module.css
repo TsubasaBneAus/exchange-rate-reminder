@@ -17,6 +17,7 @@
 
 @media screen and (max-width: 700px) and (orientation: landscape) {
   .footer {
+    position: fixed;
     margin-top: 50px;
   }
 }
