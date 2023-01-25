@@ -14,3 +14,9 @@
   font-weight: 300;
   font-family: "Noto Sans JP", sans-serif;
 }
+
+@media screen and (max-width: 700px) and (orientation: landscape) {
+  .footer {
+    margin-top: auto;
+  }
+}
