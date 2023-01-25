@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (max-width: 700px) and (orientation: landscape) {
+@media screen and (orientation: landscape) {
   .container {
     position: relative;
     padding-bottom: 30px;
