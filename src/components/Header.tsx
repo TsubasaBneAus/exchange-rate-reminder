@@ -32,7 +32,7 @@ const Header = () => {
           </li>
           <li className={styles.li}>
             <button
-              className={styles.button1}
+              className={styles.button}
               onClick={() => signOut({ callbackUrl: `/${i18n.language}` })}
             >
               {t("Header.SignOut")}
@@ -45,7 +45,7 @@ const Header = () => {
         <>
           <li className={styles.li}>
             <button
-              className={styles.button2}
+              className={styles.button}
               onClick={() =>
                 signIn("google", { callbackUrl: `/${i18n.language}` })
               }
