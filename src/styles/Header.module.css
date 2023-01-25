@@ -35,28 +35,19 @@
   font-size: 17px;
   font-weight: 300;
   text-decoration: none;
-  padding-left: 20px;
+  padding-right: 10px;
   height: 24px;
 }
 
 
-.button1 {
+.button {
   all: unset;
   cursor: pointer;
   color: white;
   font-size: 17px;
   font-weight: 300;
   height: 24px;
-  padding-left: 10px;
-}
-
-.button2 {
-  all: unset;
-  cursor: pointer;
-  color: white;
-  font-size: 17px;
-  font-weight: 300;
-  height: 24px;
+  padding-right: 10px;
 }
 
 @media screen and (max-width: 700px) {
