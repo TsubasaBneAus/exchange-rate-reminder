@@ -3,7 +3,6 @@
   background-repeat: repeat-x;
   background-position: center;
   min-height: 100vh;
-
 }
 
 @media screen and (max-width: 700px) {
@@ -12,7 +11,7 @@
   }
 }
 
-@media screen and (orientation: landscape) {
+@media screen and (max-width: 700px) and (orientation: landscape) {
   .container {
     position: relative;
     padding-bottom: 25px;
