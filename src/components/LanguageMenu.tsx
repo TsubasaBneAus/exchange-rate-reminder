@@ -39,7 +39,7 @@ const LanguageMenu = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         disableRipple
-        sx={{ width: 24, padding: 0, margin: 0 }}
+        sx={{ maxWidth: 24, padding: 0, margin: 0 }}
         onClick={handleClick}
       >
         <LanguageIcon className={styles.icon} />
