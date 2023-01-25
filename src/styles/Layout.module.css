@@ -3,10 +3,9 @@
   background-repeat: no-repeat;
   background-position: center;
   min-height: 100vh;
-  height: 100%;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 700px) and (orientation: portrait) {
   .container {
     min-height: -webkit-fill-available;
   }
