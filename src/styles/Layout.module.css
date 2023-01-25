@@ -15,5 +15,6 @@
   .container {
     position: relative;
     padding-bottom: 25px;
+    overflow: hidden;
   }
 }
