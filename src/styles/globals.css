@@ -4,8 +4,6 @@ html {
 
 body {
   background-color: rgb(13, 63, 181);
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
 main {
