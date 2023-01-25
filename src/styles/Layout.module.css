@@ -15,6 +15,6 @@
 @media screen and (orientation: landscape) {
   .container {
     position: relative;
-    padding-bottom: 35px;
+    padding-bottom: 25px;
   }
 }
