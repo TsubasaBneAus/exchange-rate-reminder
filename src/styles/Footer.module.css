@@ -17,6 +17,6 @@
 
 @media screen and (orientation: landscape) {
   .footer {
-    position: fixed;
+    margin-top: 20%;
   }
 }
