@@ -11,8 +11,6 @@ def execute_query(db_config, json_data):
         database=db_config[3],
     )
 
-    # print(f"Database Connection: {connection.is_connected()}\n")
-
     cursor = connection.cursor()
     fetched_datetime = datetime.now(ZoneInfo("Asia/Tokyo")).strftime(
         "%Y-%m-%d %H:%M:%S %Z"
@@ -21,12 +19,12 @@ def execute_query(db_config, json_data):
     # Check if the date has been fetched
     if json_data is None:
         is_data_fetched = "No"
-        query = "INSERT INTO exchangerate (fetched_datetime, is_data_fetched) VALUES (%s, %s)"
+        query = "INSERT INTO ExchangeRate (fetched_datetime, is_data_fetched) VALUES (%s, %s)"
         values = (fetched_datetime, is_data_fetched)
     else:
         is_data_fetched = "Yes"
         query = (
-            "INSERT INTO exchangerate "
+            "INSERT INTO ExchangeRate "
             "(fetched_datetime, is_data_fetched, base_currency, rate_aed, rate_afn, rate_all, rate_amd, rate_ang, rate_aoa, rate_ars, rate_aud, rate_awg, "
             "rate_azn, rate_bam, rate_bbd, rate_bdt, rate_bgn, rate_bhd, rate_bif, rate_bmd, rate_bnd, rate_bob, rate_brl, rate_bsd, rate_btc, rate_btn, "
             "rate_bwp, rate_byn, rate_byr, rate_bzd, rate_cad, rate_cdf, rate_chf, rate_clf, rate_clp, rate_cny, rate_cop, rate_crc, rate_cuc, rate_cup, "
@@ -236,5 +234,6 @@ def execute_query(db_config, json_data):
     # Execute the query
     cursor.execute(query, values)
     connection.commit()
-    # print("Records has been inserted!!\n")
+
+    # Close the connection
     connection.close()
