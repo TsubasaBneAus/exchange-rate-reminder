@@ -17,6 +17,9 @@ main {
   }
 
   body {
+    position: fixed;
+    left: 0;
+    right: 0;
     overflow: hidden;
   }
 }
