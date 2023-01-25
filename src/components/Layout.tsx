@@ -9,13 +9,13 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <>
+    <div className={styles.container}>
       <Header />
       <div className={styles.image_filter}>
         <main>{children}</main>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
