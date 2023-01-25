@@ -9,12 +9,12 @@
 @media screen and (max-width: 700px) {
   .container {
     min-height: -webkit-fill-available;
-    position: relative;
   }
 }
 
 @media screen and (orientation: landscape) {
   .container {
+    position: relative;
     padding-bottom: 25px;
   }
 }
