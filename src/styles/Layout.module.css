@@ -10,3 +10,10 @@
     min-height: -webkit-fill-available;
   }
 }
+
+@media screen and (orientation: landscape) {
+  .container {
+    position: relative;
+    padding-bottom: 25px;
+  }
+}
