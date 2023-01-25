@@ -1,18 +1,6 @@
 .container {
-  overflow: hidden;
   background-image: url(https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.image_filter {
-  height: calc(100vh - 52px);
-  overflow: hidden;
-}
-
-@media screen and (max-width: 700px) {
-  .image_filter {
-    height: calc(100vh - 65px);
-    overflow: hidden;
-  }
+  min-height: 100vh;
 }
