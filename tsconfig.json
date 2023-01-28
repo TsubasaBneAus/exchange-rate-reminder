@@ -21,7 +21,7 @@
     "**/*.tsx",
     "src/middleware.ts",
     "src/pages/protected/index.tsx",
-    "next-i18next.config.ts"
+    "next-i18next.config.js"
   ],
   "exclude": ["node_modules"]
 }
