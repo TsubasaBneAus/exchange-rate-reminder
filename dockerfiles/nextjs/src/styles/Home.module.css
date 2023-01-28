@@ -1,0 +1,135 @@
+.container1 {
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.6);
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 550px;
+  width: 100%;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5%;
+}
+
+.container3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.container4 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(16, 41, 102);
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.6);
+  padding: 10px 0;
+  max-width: 500px;
+  width: 100%;
+}
+
+.content1 {
+  color: white;
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.container5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content2 {
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+.content3 {
+  color: white;
+  font-size: 13px;
+  font-weight: 300;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.description1 {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.label {
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button {
+  color: white;
+  background-color: rgb(45, 112, 189);
+  margin-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.3);
+}
+
+.button:hover {
+  background-color: rgb(40, 100, 168);
+}
+
+.description2 {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  /* margin-top: 0; */
+}
+
+.container6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 700px) {
+  .container4 {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "Header": {
+    "MyPage": "My Page",
+    "Contact": "Contact Us",
+    "SignIn": "Sign Up / Login",
+    "SignOut": "Logout"
+  },
+  "Home": {
+    "Description1": "This application let you know the exchange rate by email",
+    "Description2": "To all people who feel bothered to check the exchange rate chart all the time for the timing of international money transfer or FX",
+    "Description3": "* The exchange rate emails are sent at 6am and 6pm JST.",
+    "Title1": "Set the Currencies",
+    "Title2": "The Current Exchange Rate",
+    "Label1": "Base Currency",
+    "Label2": "Converted Currency",
+    "Button": "Save the settings"
+  },
+  "Contact": {
+    "Title": "Inquiry",
+    "Label1": "Your Name",
+    "Label2": "Email Address",
+    "Label3": "Message",
+    "Placeholder1": "Enter your name",
+    "Placeholder2": "Enter your email address",
+    "Placeholder3": "Enter your message",
+    "Button": "Send"
+  },
+  "MyPage": {
+    "Title": "My Page",
+    "Button": "Delete your account"
+  },
+  "Modal": {
+    "Text1": "The settings has been saved!",
+    "Text2": "Set base and converted currencies!",
+    "Text3": "The inquiry email has been sent!",
+    "Text4": "Are you sure to delete your account?",
+    "Text5": "Your account has been deleted!",
+    "Button1": "Back",
+    "Button2": "Back to Home",
+    "Button3": "Yes",
+    "Button4": "No"
+  }
+}

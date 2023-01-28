@@ -1,0 +1,12 @@
+.button {
+  color: white;
+  font-size: 17px;
+  font-weight: 300;
+  font-family: "Noto Sans", "Noto Sans JP";
+  width: 100%;
+}
+
+.icon {
+  font-size: 25px;
+  color: white;
+}

@@ -1,0 +1,12 @@
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  background-color: rgb(13, 63, 181);
+}
+
+main {
+  color: white;
+  font-family: "Noto Sans JP", sans-serif;
+}
