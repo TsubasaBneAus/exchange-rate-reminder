@@ -23,7 +23,7 @@
     "eslint-config-next": "13.1.5",
     "i18next": "^22.4.9",
     "mysql2": "^3.0.1",
-    "next": "13.1.5",
+    "next": "^13.1.6-canary.3",
     "next-auth": "^4.18.10",
     "next-i18next": "^13.0.3",
     "nodemailer": "^6.9.1",
