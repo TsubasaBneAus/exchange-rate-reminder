@@ -1,5 +1,6 @@
 services:
   nextjs:
+    container_name: nextjs-dev
     build:
       context: ./dockerfiles/nextjs
       dockerfile: Dockerfile.dev
@@ -15,12 +16,19 @@ services:
       - 3000:3000
     volumes:
       - ./dockerfiles/nextjs:/app
+      - front_node_modules:/app/node_modules
+    tty: true
 
-  # nginx:
-  #   build: ./dockerfiles/nginx
-  #   ports:
-  #     - 80:80
-  #   volumes:
-  #     - ./dockerfiles/nginx/nginx.conf:/etc/nginx/nginx.conf
-  #   depends_on:
-  #     - nextjs
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - 3307:3306
+    env_file:
+      - .env
+    volumes:
+      - db-volume:/var/lib/mysql
+
+volumes:
+  front_node_modules:
+  db-volume:
