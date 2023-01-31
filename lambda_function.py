@@ -8,10 +8,11 @@ load_dotenv()
 
 # Configure the database to use
 host = os.environ["HOST"]
+port = os.environ['PORT']
 user = os.environ["USER"]
 password = os.environ["PASSWORD"]
 database = os.environ["DATABASE"]
-db_config = (host, user, password, database)
+db_config = (host, port, user, password, database)
 
 # Fetch the exchange rate data
 apikey = os.environ["API_KEY"]
