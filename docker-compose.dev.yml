@@ -4,16 +4,11 @@ services:
     build:
       context: ./dockerfiles/nextjs
       dockerfile: Dockerfile.dev
-      args:
-        - DATABASE_URL=$DATABASE_URL
-        - GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
-        - GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
-        - NEXTAUTH_URL=$NEXTAUTH_URL
-        - NEXTAUTH_SECRET=$NEXTAUTH_SECRET
-        - GMAIL_USER=$GMAIL_USER
-        - GMAIL_PASSWORD=$GMAIL_PASSWORD
     ports:
       - 3000:3000
+      - 5555:5555
+    env_file:
+      - .env
     volumes:
       - ./dockerfiles/nextjs:/app
       - front_node_modules:/app/node_modules

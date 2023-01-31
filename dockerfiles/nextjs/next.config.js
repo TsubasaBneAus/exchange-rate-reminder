@@ -8,6 +8,8 @@ const NextConfig = {
     config.resolve.fallback = { fs: false };
     return config;
   },
+
+  // Uncomment below when developing the app to enable hot reloading
   webpackDevMiddleware: (config) => {
     config.watchOptions = {
       poll: 5000,
