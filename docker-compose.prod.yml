@@ -1,28 +1,22 @@
 services:
+  nginx:
+    image: nginx:1.23.3
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./dockerfiles/nginx:/etc/nginx/conf.d
+    depends_on:
+      - nextjs
+
   nextjs:
+    image: nextjs-prod
     container_name: nextjs-prod
     build:
       context: ./dockerfiles/nextjs
       dockerfile: Dockerfile.prod
-      # args:
-      #   - DATABASE_URL=$DATABASE_URL
-      #   - GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
-      #   - GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
-      #   - NEXTAUTH_URL=$NEXTAUTH_URL
-      #   - NEXTAUTH_SECRET=$NEXTAUTH_SECRET
-      #   - GMAIL_USER=$GMAIL_USER
-      #   - GMAIL_PASSWORD=$GMAIL_PASSWORD
-    env_file:
-      - .env
     ports:
       - 3000:3000
-    volumes:
-      - ./dockerfiles/nextjs:/app
+    env_file:
+      - .env
     tty: true
-
-  nginx:
-    build: ./dockerfiles/nginx
-    ports:
-      - 80:80
-    volumes:
-      - ./dockerfiles/nginx:/etc/nginx/
