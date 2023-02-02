@@ -37,6 +37,22 @@ services:
     volumes:
       - db-volume:/var/lib/mysql
 
+  python:
+    image: python-email
+    container_name: python-email
+    build:
+      context: ./dockerfiles/python
+      dockerfile: Dockerfile
+      args:
+        - TZ=$TZ
+    ports:
+      - 3308:3308
+    env_file:
+      - .env
+    volumes:
+      - ./dockerfiles/python:/python
+    tty: true
+
 volumes:
   front_node_modules:
   db-volume:
