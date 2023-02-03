@@ -38,8 +38,8 @@ services:
       - db-volume:/var/lib/mysql
 
   python:
-    image: python-email
-    container_name: python-email
+    image: python
+    container_name: python
     build:
       context: ./dockerfiles/python
       dockerfile: Dockerfile
