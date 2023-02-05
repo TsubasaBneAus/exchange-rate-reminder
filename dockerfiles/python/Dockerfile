@@ -1,18 +1,18 @@
-FROM python:3.11
+FROM python:3.9-alpine
 
 ARG TZ
 
-WORKDIR /python
+RUN pip install --upgrade pip
 
-RUN apt-get update
-RUN apt-get install -y tzdata cron
-RUN cp /usr/share/zoneinfo/$TZ /etc/localtime
+WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --upgrade pip
+COPY send_email.py .
 RUN pip install -r requirements.txt
 
-COPY python-cron .
-RUN crontab python-cron
+RUN apk add --no-cache tzdata
+ENV TZ=$TZ
 
-CMD [ "cron", "-f" ]
+RUN echo "* * * * * python -u /app/send_email.py >> /var/log/cron.log 2>&1" > /etc/crontabs/root
+
+CMD ["crond", "-f"]

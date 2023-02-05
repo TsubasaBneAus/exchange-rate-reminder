@@ -49,8 +49,6 @@ services:
       - 3308:3308
     env_file:
       - .env
-    volumes:
-      - ./dockerfiles/python:/python
     tty: true
 
 volumes:
