@@ -20,3 +20,17 @@ services:
     env_file:
       - .env
     tty: true
+
+  python:
+    image: python
+    container_name: python
+    build:
+      context: ./dockerfiles/python
+      dockerfile: Dockerfile
+      args:
+        - TZ=$TZ
+    ports:
+      - 3308:3308
+    env_file:
+      - .env
+    tty: true

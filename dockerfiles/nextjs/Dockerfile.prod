@@ -1,37 +1,51 @@
-# Install dependencies only when needed
+# The base image is node:18-alpine
 FROM node:18-alpine AS deps
+
+# Add libc6-compat for compatibility
 RUN apk add --no-cache libc6-compat
+
+# Set the working directory
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy the package.json files to the working directory and install dependencies
+COPY package*.json ./
 RUN npm ci
 
-# Rebuild the source code only when needed
+#===============================================================================
+# The base image is node:18-alpine
 FROM node:18-alpine AS builder
+
+# Set the working directory
 WORKDIR /app
 
+# Copy the installed dependencies from the deps stage
 COPY --from=deps /app/node_modules ./node_modules
+
+# Copy the rest of the application files and generate Prisma client
 COPY . .
 RUN npx prisma generate
+
+# Build the nextjs application
 RUN npm run build
 
-# Production image, copy all the files and run next
+#===============================================================================
+# The base image is node:18-alpine
 FROM node:18-alpine AS runner
+
+# Set the working directory
 WORKDIR /app
 
+# Set the environment variable for production
 ENV NODE_ENV production
 
+# Add the nodejs group and nextjs user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Copy the built public, standalone and static files and set permissions
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
+# Start the production server
 CMD ["node", "server.js"]
