@@ -11,8 +11,7 @@ RUN pip install --upgrade pip
 WORKDIR /app
 
 # Copy scripts to the working directory
-COPY requirements.txt .
-COPY send_email.py .
+COPY . .
 
 # Install the required packages listed in requirements.txt
 RUN pip install -r requirements.txt
