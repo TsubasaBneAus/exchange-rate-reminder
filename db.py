@@ -237,4 +237,5 @@ def execute_query(db_config, json_data):
     connection.commit()
 
     # Close the connection
+    cursor.close()
     connection.close()
