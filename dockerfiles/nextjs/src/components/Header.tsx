@@ -47,7 +47,11 @@ const Header = () => {
             <button
               className={styles.button}
               onClick={() =>
-                signIn("google", { callbackUrl: `/${i18n.language}` })
+                signIn(
+                  "google",
+                  { callbackUrl: `/${i18n.language}` },
+                  { prompt: "login" }
+                )
               }
             >
               {t("Header.SignIn")}
