@@ -8,7 +8,7 @@
   "Home": {
     "Description1": "This application let you know the exchange rate by email",
     "Description2": "To all people who feel bothered to check the exchange rate chart all the time for the timing of international money transfer or FX",
-    "Description3": "* The exchange rate emails are sent at 6am and 6pm JST.",
+    "Description3": "* The exchange rate emails are sent at 6am and 6pm JST (Japan Standard Time).",
     "Title1": "Set the Currencies",
     "Title2": "The Current Exchange Rate",
     "Label1": "Base Currency",
