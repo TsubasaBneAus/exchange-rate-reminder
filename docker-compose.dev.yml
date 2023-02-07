@@ -45,8 +45,8 @@ services:
       dockerfile: Dockerfile
       args:
         - TZ=$TZ
-    ports:
-      - 3308:3308
+    # ports:
+    #   - 3308:3308
     env_file:
       - .env
     volumes:
