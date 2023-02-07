@@ -33,12 +33,20 @@
 
 .container4 {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   background-color: rgb(16, 41, 102);
   border-radius: 10px;
   box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.6);
   padding: 10px 0;
+  max-width: 500px;
+  width: 100%;
+}
+
+.container5 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   max-width: 500px;
   width: 100%;
 }
@@ -51,10 +59,8 @@
   margin-bottom: 0;
 }
 
-.container5 {
+.container6 {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .content2 {
@@ -71,9 +77,16 @@
 .content3 {
   color: white;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: auto;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+}
+
+.content4 {
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 0;
 }
 
 .description1 {
@@ -117,14 +130,6 @@
   font-weight: 500;
 }
 
-.container6 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 10%;
-  padding-right: 10%;
-  margin-top: 50px;
-}
 
 @media screen and (max-width: 700px) {
   .container1 {

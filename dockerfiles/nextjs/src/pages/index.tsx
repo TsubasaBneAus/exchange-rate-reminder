@@ -14,6 +14,7 @@ const Home = () => {
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
   const [exchangeRate, setExchangeRate] = useState("");
+  const [fetchedDatetime, setFetchedDatetime] = useState<string | null>(null);
   const [base, setBase] = useState<string | null>(null);
   const [converted, setConverted] = useState<string | null>(null);
   const [modal, setModal] = useState(false);
@@ -32,9 +33,11 @@ const Home = () => {
       }
     });
 
-    // Display the current exchange rate if users have already set preference of the currencies
+    // Display the current exchange rate and fetched date and time
+    // if users have already set preference of the currencies
     if (result.base !== null && result.converted !== null) {
       setExchangeRate(result.exchangeRate);
+      setFetchedDatetime(result.fetchedDatetime);
     }
   };
 
@@ -52,15 +55,18 @@ const Home = () => {
         <div className={styles.container3}>
           <h1 className={styles.title}>{t("Home.Title2")}</h1>
           <div className={styles.container4}>
-            <p className={styles.content1}>
-              {initialBase} &#8594; {initialConverted}
-            </p>
             <div className={styles.container5}>
-              <p className={styles.content2}>{exchangeRate}</p>
-              <p className={styles.content3}>
-                ({initialConverted} / {initialBase})
+              <p className={styles.content1}>
+                {initialBase} &#8594; {initialConverted}
               </p>
+              <div className={styles.container6}>
+                <p className={styles.content2}>{exchangeRate}</p>
+                <p className={styles.content3}>
+                  ({initialConverted} / {initialBase})
+                </p>
+              </div>
             </div>
+            <p className={styles.content4}>{t("Home.Datetime")}: {fetchedDatetime}</p>
           </div>
         </div>
       );

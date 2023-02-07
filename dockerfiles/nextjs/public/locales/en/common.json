@@ -11,6 +11,7 @@
     "Description3": "* The exchange rate emails are sent at 6am and 6pm JST (Japan Standard Time).",
     "Title1": "Set the Currencies",
     "Title2": "The Current Exchange Rate",
+    "Datetime": "Fetched Date and Time",
     "Label1": "Base Currency",
     "Label2": "Converted Currency",
     "Button": "Save the settings"
