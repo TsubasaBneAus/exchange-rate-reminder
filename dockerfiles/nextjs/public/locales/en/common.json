@@ -7,9 +7,9 @@
   },
   "Home": {
     "Description1": "This application let you know the exchange rate by email",
-    "Description2": "To all people who feel bothered to check the exchange rate chart all the time for the timing of international money transfer or FX",
+    "Description2": "To everyone who feels bothered to check the exchange rate chart all the time for the timing of international money transfer or foreign exchange",
     "Description3": "* The exchange rate emails are sent at 6am and 6pm JST (Japan Standard Time).",
-    "Title1": "Set the Currencies",
+    "Title1": "Please set the currencies",
     "Title2": "The Current Exchange Rate",
     "Datetime": "Fetched Date and Time",
     "Label1": "Base Currency",
@@ -21,9 +21,9 @@
     "Label1": "Your Name",
     "Label2": "Email Address",
     "Label3": "Message",
-    "Placeholder1": "Enter your name",
-    "Placeholder2": "Enter your email address",
-    "Placeholder3": "Enter your message",
+    "Placeholder1": "Please enter your name",
+    "Placeholder2": "Please enter your email address",
+    "Placeholder3": "Please enter your message",
     "Button": "Send"
   },
   "MyPage": {
@@ -32,9 +32,9 @@
   },
   "Modal": {
     "Text1": "The settings has been saved!",
-    "Text2": "Set base and converted currencies!",
+    "Text2": "Please set base and converted currencies!",
     "Text3": "The inquiry email has been sent!",
-    "Text4": "Enter the correct email!",
+    "Text4": "Please enter your correct email!",
     "Text5": "Are you sure to delete your account?",
     "Text6": "Your account has been deleted!",
     "Button1": "Back",
