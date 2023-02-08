@@ -72,14 +72,12 @@ const Header = () => {
       <Link href="/" className={styles.title}>
         Exchange Rate Reminder
       </Link>
-      <nav>
-        <ul className={styles.ul}>
-          {navbar()}
-          <li className={styles.li}>
-            <LanguageMenu />
-          </li>
-        </ul>
+      <nav className={styles.nav}>
+        <ul className={styles.ul}>{navbar()}</ul>
       </nav>
+      <div className={styles.languageMenu}>
+        <LanguageMenu />
+      </div>
     </header>
   );
 };
