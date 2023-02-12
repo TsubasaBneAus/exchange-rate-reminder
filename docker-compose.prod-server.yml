@@ -3,7 +3,7 @@ services:
     image: nginx:1.23.3-alpine
     container_name: nginx-ssl
     volumes:
-      - ./dockerfiles/nginx/prod/default.conf:/etc/nginx/conf.d
+      - ./dockerfiles/nginx/prod/nginx-conf:/etc/nginx/conf.d
       - log:/var/log/nginx
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
