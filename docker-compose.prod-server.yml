@@ -1,0 +1,40 @@
+services:
+  nginx-ssl:
+    image: nginx:1.23.3-alpine
+    container_name: nginx-ssl
+    volumes:
+      - ./dockerfiles/nginx/prod/default.conf:/etc/nginx/conf.d
+      - log:/var/log/nginx
+      - html:/usr/share/nginx/html
+      - letsencrypt:/etc/letsencrypt
+      - ./dockerfiles/nginx/prod/nginx-ssl.sh:/scripts
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - TZ=$TZ
+    command: /scripts/nginx-ssl.sh
+    restart: always
+
+  certbot:
+    image: certbot/certbot:arm64v8-v2.2.0
+    container_name: certbot
+    volumes:
+      - html:/usr/share/nginx/html
+      - letsencrypt:/etc/letsencrypt
+      - log_letsencrypt:/var/log/letsencrypt
+      - ./dockerfiles/nginx/prod/certbot.sh:/scripts
+    environment:
+      - TZ=$TZ
+    command: /scripts/certbot.sh
+    restart: always
+
+volumes:
+  log:
+  html:
+  letsencrypt:
+  log_letsencrypt:
+
+networks:
+  my_network:
+    external: true

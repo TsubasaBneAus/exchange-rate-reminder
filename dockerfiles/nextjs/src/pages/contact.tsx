@@ -26,16 +26,35 @@ const Contact = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  // Check validation of the email user entered
+  const checkValidation = () => {
+    const regex =
+      /^[a-zA-Z0-9]+[a-zA-Z0-9\._-]*@[a-zA-Z0-9_-]+[a-zA-Z0-9\._-]+$/;
+
+    // Check if the email user entered matches the regular expression for email validation
+    if (regex.test(formValues.email)) {
+      setModalType("Contact");
+      return true;
+    } else {
+      setModalType("Email Validation Error");
+      return false;
+    }
+  };
+
   // Handle the form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await fetch("/api/sendEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formValues),
-    });
+
+    // Check email validation
+    if (checkValidation()) {
+      await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+    }
   };
 
   return (
@@ -44,7 +63,6 @@ const Contact = () => {
         className={styles.formContainer}
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           handleSubmit(e);
-          setModalType("Contact");
           setModal(true);
         }}
       >

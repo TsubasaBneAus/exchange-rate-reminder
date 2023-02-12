@@ -49,11 +49,13 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
         base: base,
         converted: converted,
         exchangeRate: finalisedExchangeRate,
+        fetchedDatetime: latestData!["fetched_datetime"],
       });
     } else {
       res.status(200).json({
         base: null,
         converted: null,
+        fetchedDatetime: null,
       });
     }
   }

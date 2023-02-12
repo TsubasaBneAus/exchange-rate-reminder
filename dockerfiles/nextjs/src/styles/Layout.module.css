@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 760px) {
   .container {
     min-height: -webkit-fill-available;
   }

@@ -80,7 +80,7 @@ def send_email(aws_config, data):
                             <hr>
                             <h2>The Current Exchange Rate</h2>
                             <h2>{base} &#8594; {converted}: {exchange_rate} ({converted}/{base})</h2>
-                            <h4>Acquisition Date and Time: {fetched_datetime}</h4>
+                            <h4>Fetched Date and Time: {fetched_datetime}</h4>
                             <br>
                             <br>
                             <p>This email is sent using <a href='https://aws.amazon.com/ses/'>Amazon SES</a>.</p>

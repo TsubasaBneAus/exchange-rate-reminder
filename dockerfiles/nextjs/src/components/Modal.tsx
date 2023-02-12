@@ -57,6 +57,10 @@ const Modal = (props: Props) => {
         router.push("/");
         break;
 
+      case "Back":
+        props.setModal(false);
+        break;
+
       case "Remove an account":
         await fetch("/api/deleteAccount");
         setModalType("Account Removed");
@@ -124,9 +128,18 @@ const Modal = (props: Props) => {
         setModalAction({ button1: "Back to Home", button2: null });
         break;
 
-      case "MyPage":
+      case "Email Validation Error":
         setModalText({
           text: t("Modal.Text4"),
+          button1: t("Modal.Button1"),
+          button2: null,
+        });
+        setModalAction({ button1: "Back", button2: null });
+        break;
+
+      case "MyPage":
+        setModalText({
+          text: t("Modal.Text5"),
           button1: t("Modal.Button3"),
           button2: t("Modal.Button4"),
         });
@@ -139,7 +152,7 @@ const Modal = (props: Props) => {
 
     if (modalType === "Account Removed") {
       setModalText({
-        text: t("Modal.Text5"),
+        text: t("Modal.Text6"),
         button1: t("Modal.Button2"),
         button2: null,
       });

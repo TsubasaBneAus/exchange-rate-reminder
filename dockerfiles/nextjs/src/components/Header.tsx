@@ -47,7 +47,11 @@ const Header = () => {
             <button
               className={styles.button}
               onClick={() =>
-                signIn("google", { callbackUrl: `/${i18n.language}` })
+                signIn(
+                  "google",
+                  { callbackUrl: `/${i18n.language}` },
+                  { prompt: "login" }
+                )
               }
             >
               {t("Header.SignIn")}
@@ -68,14 +72,12 @@ const Header = () => {
       <Link href="/" className={styles.title}>
         Exchange Rate Reminder
       </Link>
-      <nav>
-        <ul className={styles.ul}>
-          {navbar()}
-          <li className={styles.li}>
-            <LanguageMenu />
-          </li>
-        </ul>
+      <nav className={styles.nav}>
+        <ul className={styles.ul}>{navbar()}</ul>
       </nav>
+      <div className={styles.languageMenu}>
+        <LanguageMenu />
+      </div>
     </header>
   );
 };

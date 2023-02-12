@@ -1,11 +1,11 @@
 services:
   nginx:
-    image: nginx:1.23.3
+    image: nginx:1.23.3-alpine
     container_name: nginx
     ports:
       - 80:80
     volumes:
-      - ./dockerfiles/nginx:/etc/nginx/conf.d
+      - ./dockerfiles/nginx/dev:/etc/nginx/conf.d
     depends_on:
       - nextjs
 
@@ -45,8 +45,8 @@ services:
       dockerfile: Dockerfile
       args:
         - TZ=$TZ
-    # ports:
-    #   - 3308:3308
+    ports:
+      - 3308:3308
     env_file:
       - .env
     volumes:

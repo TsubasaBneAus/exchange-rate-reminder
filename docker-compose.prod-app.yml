@@ -1,14 +1,4 @@
 services:
-  nginx:
-    image: nginx:1.23.3
-    container_name: nginx
-    ports:
-      - 80:80
-    volumes:
-      - ./dockerfiles/nginx:/etc/nginx/conf.d
-    depends_on:
-      - nextjs
-
   nextjs:
     image: nextjs-prod
     container_name: nextjs-prod
@@ -34,3 +24,7 @@ services:
     env_file:
       - .env
     tty: true
+
+networks:
+  my_network:
+    external: true
