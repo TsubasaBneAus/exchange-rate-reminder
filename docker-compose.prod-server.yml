@@ -13,7 +13,7 @@ services:
       - 443:443
     environment:
       - TZ=$TZ
-    command: /scripts/nginx-ssl.sh
+    command: sh -c "chmod +x /scripts/nginx-ssl.sh && /scripts/nginx-ssl.sh"
     restart: always
 
   certbot:
@@ -26,7 +26,7 @@ services:
       - ./dockerfiles/nginx/prod:/scripts
     environment:
       - TZ=$TZ
-    command: /scripts/certbot.sh
+    command: sh -c "chmod +x /scripts/certbot.sh && /scripts/certbot.sh
     restart: always
 
 volumes:
