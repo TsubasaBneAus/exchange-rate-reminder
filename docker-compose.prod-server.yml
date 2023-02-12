@@ -3,11 +3,11 @@ services:
     image: nginx:1.23.3-alpine
     container_name: nginx-ssl
     volumes:
-      - ./dockerfiles/nginx/prod/nginx-conf:/etc/nginx/conf.d
+      - ./dockerfiles/nginx/prod/config:/etc/nginx/conf.d
       - log:/var/log/nginx
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
-      - ./dockerfiles/nginx/prod/nginx-ssl.sh:/scripts
+      - ./dockerfiles/nginx/prod/scripts:/scripts
     ports:
       - 80:80
       - 443:443
@@ -23,7 +23,7 @@ services:
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
       - log_letsencrypt:/var/log/letsencrypt
-      - ./dockerfiles/nginx/prod/certbot.sh:/scripts
+      - ./dockerfiles/nginx/prod:/scripts
     environment:
       - TZ=$TZ
     command: /scripts/certbot.sh
