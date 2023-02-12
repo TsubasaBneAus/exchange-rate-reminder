@@ -7,7 +7,7 @@ services:
       - log:/var/log/nginx
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
-      - ./dockerfiles/nginx/prod/scripts:/scripts
+      - ./dockerfiles/nginx/prod/scripts/nginx-ssl.sh:/scripts
     ports:
       - 80:80
       - 443:443
@@ -23,7 +23,7 @@ services:
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
       - log_letsencrypt:/var/log/letsencrypt
-      - ./dockerfiles/nginx/prod/scripts:/scripts
+      - ./dockerfiles/nginx/prod/scripts/certbot.sh:/scripts
     environment:
       - TZ=$TZ
     entrypoint: /bin/sh
