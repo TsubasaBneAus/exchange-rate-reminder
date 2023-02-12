@@ -13,7 +13,7 @@ services:
       - 443:443
     environment:
       - TZ=$TZ
-    command: /bin/sh -c "chmod +x /scripts/* && /scripts/nginx-ssl.sh"
+    command: /bin/sh -c "chmod +x /scripts/nginx-ssl.sh && /scripts/nginx-ssl.sh"
     restart: always
 
   certbot:
@@ -27,7 +27,7 @@ services:
     environment:
       - TZ=$TZ
     entrypoint: /bin/sh
-    command: /bin/sh -c "chmod +x /scripts/* && /scripts/certbot.sh"
+    command: /bin/sh -c "chmod +x /scripts/certbot.sh && /scripts/certbot.sh"
     restart: always
 
 volumes:
