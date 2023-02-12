@@ -3,17 +3,16 @@ services:
     image: nginx:1.23.3-alpine
     container_name: nginx-ssl
     volumes:
-      - ./dockerfiles/nginx/prod/config:/etc/nginx/conf.d
+      - ./dockerfiles/nginx/prod:/etc/nginx/conf.d
       - log:/var/log/nginx
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
-      - ./dockerfiles/nginx/prod/scripts:/scripts
     ports:
       - 80:80
       - 443:443
     environment:
       - TZ=$TZ
-    command: /bin/sh -c "chmod +x /scripts/nginx-ssl.sh && /scripts/nginx-ssl.sh"
+    command: "/bin/sh -c 'while :; do sleep 36h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     restart: always
 
   certbot:
@@ -23,11 +22,9 @@ services:
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
       - log_letsencrypt:/var/log/letsencrypt
-      - ./dockerfiles/nginx/prod/scripts:/scripts
     environment:
       - TZ=$TZ
-    entrypoint: /bin/sh
-    command: /bin/sh -c "chmod +x /scripts/certbot.sh && /scripts/certbot.sh"
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     restart: always
 
 volumes:
