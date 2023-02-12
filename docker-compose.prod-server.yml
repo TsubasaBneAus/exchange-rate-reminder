@@ -13,7 +13,7 @@ services:
       - 443:443
     environment:
       - TZ=$TZ
-    command: /bin/sh -c "chmod +x /scripts/nginx-ssl.sh && /scripts/nginx-ssl.sh"
+    command: /bin/sh -c "chmod +x /scripts/* && /scripts/nginx-ssl.sh"
     restart: always
 
   certbot:
@@ -23,10 +23,11 @@ services:
       - html:/usr/share/nginx/html
       - letsencrypt:/etc/letsencrypt
       - log_letsencrypt:/var/log/letsencrypt
-      - ./dockerfiles/nginx/prod:/scripts
+      - ./dockerfiles/nginx/prod/scripts:/scripts
     environment:
       - TZ=$TZ
-    command: /bin/sh -c "chmod +x /scripts/certbot.sh && /scripts/certbot.sh"
+    entrypoint: /bin/sh
+    command: /bin/sh -c "chmod +x /scripts/* && /scripts/certbot.sh"
     restart: always
 
 volumes:
