@@ -5,7 +5,7 @@ services:
     volumes:
       - ./dockerfiles/nginx/prod/conf.d:/etc/nginx/conf.d
       - ./dockerfiles/nginx/prod/log:/var/log/nginx
-      - ./dockerfiles/nginx/prod/html:/usr/share/nginx/html
+      - ./dockerfiles/nginx/prod/var/www/html:/var/www/html
       - ./dockerfiles/nginx/prod/letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
