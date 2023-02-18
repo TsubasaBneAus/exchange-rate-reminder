@@ -11,6 +11,7 @@ services:
       - .env
     tty: true
     networks:
+      - default
       - shared-network
 
   python:
