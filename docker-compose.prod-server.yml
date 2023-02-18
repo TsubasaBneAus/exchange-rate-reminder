@@ -10,6 +10,8 @@ services:
       - 80:80
       - 443:443
     restart: always
+    networks:
+      - shared-network
 
   certbot:
     image: certbot/certbot:v2.2.0
