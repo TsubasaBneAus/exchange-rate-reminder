@@ -26,5 +26,5 @@ services:
     tty: true
 
 networks:
-  my_network:
+  shared-network:
     external: true

@@ -1,31 +1,25 @@
 services:
-  nginx-ssl:
-    image: nginx:1.23.3-alpine
-    container_name: nginx-ssl
+  nginx:
+    image: nginx:1.23.3
+    container_name: nginx
     volumes:
       - ./dockerfiles/nginx/prod/conf.d:/etc/nginx/conf.d
-      - ./dockerfiles/nginx/prod/log:/var/log/nginx
-      - ./dockerfiles/nginx/prod/var/www/html:/var/www/html
-      - ./dockerfiles/nginx/prod/letsencrypt:/etc/letsencrypt
+      - /var/www/html:/var/www/html
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
       - 443:443
-    environment:
-      - TZ=$TZ
-    command: '/bin/sh -c ''while :; do sleep 36h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
     restart: always
 
   certbot:
     image: certbot/certbot:v2.2.0
     container_name: certbot
     volumes:
-      - ./dockerfiles/nginx/prod/html:/usr/share/nginx/html
-      - ./dockerfiles/nginx/prod/letsencrypt:/etc/letsencrypt
-      - ./dockerfiles/nginx/prod/log_letsencrypt:/var/log/letsencrypt
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - /var/www/html:/var/www/html
+      - /etc/letsencrypt:/etc/letsencrypt
+    command: ["--version"]
     restart: always
 
 networks:
-  default:
-    external:
-      name: mynet
+  shared-network:
+    external: true
