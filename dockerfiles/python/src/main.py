@@ -13,9 +13,9 @@ def main():
         # Configure the database to use
         host = os.environ["MYSQL_RDS_HOST"]
         port = os.environ["MYSQL_RDS_PORT"]
-        user = os.environ["MYSQL_USER"]
-        password = os.environ["MYSQL_PASSWORD"]
-        database = os.environ["MYSQL_DATABASE"]
+        user = os.environ["MYSQL_RDS_USER"]
+        password = os.environ["MYSQL_RDS_PASSWORD"]
+        database = os.environ["MYSQL_RDS_DATABASE"]
         db_config = (host, port, user, password, database)
 
         # Execute query
