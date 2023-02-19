@@ -54,3 +54,9 @@
   position: fixed;
   z-index: 5;
 }
+
+@media screen and (max-width: 760px) {
+  .formContainer {
+    width: 95%;
+  }
+}
