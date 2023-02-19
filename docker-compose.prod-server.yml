@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:1.23.3
+    image: nginx:1.23.3-alpine
     container_name: nginx
     volumes:
       - ./dockerfiles/nginx/prod/conf.d:/etc/nginx/conf.d
