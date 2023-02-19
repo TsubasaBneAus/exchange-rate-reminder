@@ -143,8 +143,12 @@
 
 @media screen and (max-width: 760px) {
   .container1 {
-    margin-left: 0;
-    margin-right: 0;
+    width: 95%;
+  }
+
+  .title {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .container4 {
