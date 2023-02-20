@@ -11,7 +11,7 @@ RUN pip install --upgrade pip
 WORKDIR /app
 
 # Copy scripts to the working directory
-COPY src .
+COPY src ./src
 COPY requirements.txt .
 
 # Install the required packages listed in requirements.txt
