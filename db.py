@@ -6,9 +6,10 @@ from zoneinfo import ZoneInfo
 def execute_query(db_config, json_data):
     connection = db.connect(
         host=db_config[0],
-        user=db_config[1],
-        password=db_config[2],
-        database=db_config[3],
+        port=db_config[1],
+        user=db_config[2],
+        password=db_config[3],
+        database=db_config[4],
     )
 
     cursor = connection.cursor()
@@ -236,4 +237,5 @@ def execute_query(db_config, json_data):
     connection.commit()
 
     # Close the connection
+    cursor.close()
     connection.close()
