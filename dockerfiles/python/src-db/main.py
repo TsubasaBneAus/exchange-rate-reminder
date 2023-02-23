@@ -3,7 +3,8 @@ import requests
 from dotenv import load_dotenv
 import db
 
-def lambda_handler(event, context):
+# Main function to execute all codes
+def main():
     # Load contents of the .env file
     load_dotenv()
 
@@ -26,7 +27,17 @@ def lambda_handler(event, context):
         response = requests.request("GET", url, headers=headers, data=payload)
         response.raise_for_status()
         json_data = response.json()
+        print("Data has been fetched decently\n")
     except requests.HTTPError:
         json_data = None
+        print("Failed to fetch the data\n")
 
-    db.execute_query(db_config, json_data)
+    try:
+        db.execute_query(db_config, json_data)
+    except Exception:
+        print("An error happened in db.py\n")
+        
+# This block of code is only executed when the script is run directly
+if __name__ == "__main__":
+    # Call the main function
+    main()
