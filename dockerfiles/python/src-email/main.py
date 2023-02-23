@@ -31,11 +31,11 @@ def main():
         send_email(aws_config, data)
 
         # Log that email has been sent to the users
-        print ("Email has been sent to the users\n")
+        print ("Email has been sent to the users!\n")
 
     except Exception:
         # Log that an error happened in main.py
-        print("An error happened in main.py\n")
+        print("An error happened in main.py!\n")
 
 # This block of code is only executed when the script is run directly
 if __name__ == "__main__":
