@@ -54,5 +54,5 @@ def execute_query(db_config):
 
     except Exception:
         # Log that an error happened in db.py
-        print("An error happened in db.py\n")
+        print("An error happened in db.py!\n")
         raise

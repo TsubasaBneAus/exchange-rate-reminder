@@ -113,5 +113,5 @@ def send_email(aws_config, data):
                 )
     except Exception:
         # Log that an error happened in send_email.py
-        print("An error happened in send_email.py\n")
+        print("An error happened in send_email.py!\n")
         raise
