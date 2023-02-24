@@ -16,10 +16,10 @@ COPY src-email ./src-email
 # and set the file permission for each main.py
 WORKDIR /app/src-db
 RUN pip install -r requirements.txt
-RUN chmod 700 main.py
+RUN chmod 755 main.py
 WORKDIR /app/src-email
 RUN pip install -r requirements.txt
-RUN chmod 700 main.py
+RUN chmod 755 main.py
 
 # Add the tzdata package for timezone support
 WORKDIR /app
