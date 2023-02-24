@@ -21,6 +21,8 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
     command: ["--version"]
     restart: always
+    networks:
+      - shared-network
 
 networks:
   shared-network:
