@@ -26,6 +26,8 @@ services:
     env_file:
       - .env
     tty: true
+    networks:
+      - shared-network
 
 networks:
   shared-network:
