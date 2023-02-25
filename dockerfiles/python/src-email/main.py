@@ -1,3 +1,5 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import os
 from dotenv import load_dotenv
 from db import execute_query
@@ -6,6 +8,9 @@ from send_email import send_email
 # Main function to execute all codes
 def main():
     # Handle exception of "main" function
+    current_datetime = datetime.now(ZoneInfo("Asia/Tokyo")).strftime(
+        "%Y-%m-%d %H:%M:%S %Z"
+    )
     try:
         # Load contents of the .env file
         load_dotenv()
@@ -31,11 +36,12 @@ def main():
         send_email(aws_config, data)
 
         # Log that email has been sent to the users
-        print ("Email has been sent to the users!\n")
+        print(f"{current_datetime}: Email has been sent to the users!")
 
     except Exception:
         # Log that an error happened in main.py
-        print("An error happened in main.py!\n")
+        print(f"{current_datetime}: An error happened in main.py!")
+
 
 # This block of code is only executed when the script is run directly
 if __name__ == "__main__":
