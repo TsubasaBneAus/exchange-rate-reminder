@@ -1,7 +1,12 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import mysql.connector as db
 
 # Execute the query to get all user preferences
 def execute_query(db_config):
+    current_datetime = datetime.now(ZoneInfo("Asia/Tokyo")).strftime(
+        "%Y-%m-%d %H:%M:%S %Z"
+    )
     # Handle exception of "execute_query" function
     try:
         # Connect to the database
@@ -54,5 +59,5 @@ def execute_query(db_config):
 
     except Exception:
         # Log that an error happened in db.py
-        print("An error happened in db.py!\n")
+        print(f"{current_datetime}: An error happened in db.py!")
         raise

@@ -1,3 +1,5 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import os
 import requests
 from dotenv import load_dotenv
@@ -24,24 +26,27 @@ def main():
         url = f"https://api.apilayer.com/exchangerates_data/latest?base={base_currency}"
         payload = {}
         headers = {"apikey": apikey}
+        current_datetime = datetime.now(ZoneInfo("Asia/Tokyo")).strftime(
+            "%Y-%m-%d %H:%M:%S %Z"
+        )
 
+        # Handle exception of fetching the exchange rate data
         try:
             response = requests.request("GET", url, headers=headers, data=payload)
             response.raise_for_status()
             json_data = response.json()
-            print("Data has been fetched decently!\n")
+            print(f"{current_datetime}: Data has been fetched decently!")
         except requests.HTTPError:
             json_data = None
-            print("Failed to fetch the data!\n")
+            print(f"{current_datetime}: Failed to fetch the data!")
 
-        try:
-            db.execute_query(db_config, json_data)
-        except Exception:
-            print("An error happened in db.py!\n")
-            
+        # Execute a query to store the exchange rate data
+        db.execute_query(db_config, json_data)
+
     except Exception:
         # Log that an error happened in main.py
-        print("An error happened in main.py!\n")
+        print(f"{current_datetime}: An error happened in main.py!")
+
 
 # This block of code is only executed when the script is run directly
 if __name__ == "__main__":

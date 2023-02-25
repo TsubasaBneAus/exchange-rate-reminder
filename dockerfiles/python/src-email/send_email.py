@@ -1,3 +1,5 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import boto3
 from currencies import currencies
 from decimal import Decimal, ROUND_HALF_UP
@@ -14,6 +16,9 @@ def calc_exchange_rate(base, converted, data):
 # Send email to all users utilising Amazon SES
 def send_email(aws_config, data):
     # Handle exception of "send_email" function
+    current_datetime = datetime.now(ZoneInfo("Asia/Tokyo")).strftime(
+        "%Y-%m-%d %H:%M:%S %Z"
+    )
     try:
         client = boto3.client(
             "ses",
@@ -113,5 +118,5 @@ def send_email(aws_config, data):
                 )
     except Exception:
         # Log that an error happened in send_email.py
-        print("An error happened in send_email.py!\n")
+        print(f"{current_datetime}: An error happened in send_email.py!")
         raise
