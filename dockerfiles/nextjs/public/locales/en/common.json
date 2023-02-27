@@ -9,6 +9,7 @@
     "Description1": "This application let you know the exchange rate by email.",
     "Description2": "To everyone who feels bothered to check the exchange rate chart all the time for the timing of international money transfer or foreign exchange",
     "Description3": "* The exchange rate emails are sent at 6am and 6pm JST (Japan Standard Time).",
+    "Description4": "* Please delete your account on My Page if you would like to stop email delivery.",
     "Title1": "Please set the currencies",
     "Title2": "The Current Exchange Rate",
     "Datetime": "Fetched Date and Time",
