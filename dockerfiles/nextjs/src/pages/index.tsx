@@ -7,9 +7,11 @@ import currencies from "../lib/currencies";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 const Home = () => {
   const { t, i18n } = useTranslation("");
+  const router = useRouter();
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
@@ -38,6 +40,11 @@ const Home = () => {
     if (result.base !== null && result.converted !== null) {
       setExchangeRate(result.exchangeRate);
       setFetchedDatetime(result.fetchedDatetime);
+    }
+
+    // Change languages to the one users selected previously
+    if (result.language !== null) {
+      router.push(`/${result.language}`)
     }
   };
 
