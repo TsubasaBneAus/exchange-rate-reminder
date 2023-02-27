@@ -52,7 +52,7 @@ def send_email(aws_config, data):
                 body_text = ""
                 fetched_datetime = data[2]["fetched_datetime"]
                 if user_pref["language"] == "ja":
-                    subject_text = f"現在の為替レート：{exchange_rate} ({converted}/{base})"
+                    subject_text = f"{exchange_rate} ({converted}/{base})"
                     body_html = f"""
                     <html>
                         <head></head>
@@ -76,7 +76,7 @@ def send_email(aws_config, data):
                         "このメールはAmazon SESを使用して送信されています。"
                     )
                 else:
-                    subject_text = f"The Current Exchange Rate: {exchange_rate} ({converted}/{base})"
+                    subject_text = f"{exchange_rate} ({converted}/{base})"
                     body_html = f"""
                     <html>
                         <head></head>
