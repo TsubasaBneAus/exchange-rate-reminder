@@ -7,9 +7,11 @@ import currencies from "../lib/currencies";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 const Home = () => {
   const { t, i18n } = useTranslation("");
+  const router = useRouter();
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);
   const [initialConverted, setInitialConverted] = useState<string | null>(null);
@@ -38,6 +40,11 @@ const Home = () => {
     if (result.base !== null && result.converted !== null) {
       setExchangeRate(result.exchangeRate);
       setFetchedDatetime(result.fetchedDatetime);
+    }
+
+    // Change languages to the one users selected previously
+    if (result.language !== null) {
+      router.push(`/${result.language}`)
     }
   };
 
@@ -118,6 +125,7 @@ const Home = () => {
             </button>
           </form>
           <p className={styles.description1}>{t("Home.Description3")}</p>
+          <p className={styles.description2}>{t("Home.Description4")}</p>
         </div>
         <Modal
           modal={modal}
@@ -130,10 +138,10 @@ const Home = () => {
   } else {
     return (
       <div className={styles.container7}>
-        <h1 className={styles.description2} suppressHydrationWarning>
+        <h1 className={styles.description3} suppressHydrationWarning>
           {t("Home.Description1")}
         </h1>
-        <h1 className={styles.description2} suppressHydrationWarning>
+        <h1 className={styles.description3} suppressHydrationWarning>
           {t("Home.Description2")}
         </h1>
       </div>

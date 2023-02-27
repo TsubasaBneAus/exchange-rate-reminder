@@ -24,6 +24,7 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
         id: session.user.id,
       },
       select: {
+        language: true,
         base: true,
         converted: true,
       },
@@ -36,6 +37,7 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
+    const language = userPreference?.language
     const base = userPreference?.base as keyof ExchangeRate;
     const converted = userPreference?.converted as keyof ExchangeRate;
 
@@ -46,6 +48,7 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
       const exchangeRate = convertedValue / baseValue;
       const finalisedExchangeRate = calcExchangeRate(exchangeRate);
       res.status(200).json({
+        language: language,
         base: base,
         converted: converted,
         exchangeRate: finalisedExchangeRate,
@@ -53,6 +56,7 @@ const GetPreferences = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     } else {
       res.status(200).json({
+        language: null,
         base: null,
         converted: null,
         fetchedDatetime: null,
