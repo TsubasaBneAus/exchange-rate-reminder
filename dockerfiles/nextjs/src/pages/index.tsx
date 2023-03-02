@@ -138,10 +138,18 @@ const Home = () => {
   } else {
     return (
       <div className={styles.container7}>
-        <h1 className={styles.description3} suppressHydrationWarning>
+        <h1
+          className={styles.description3}
+          data-testid="description1"
+          suppressHydrationWarning
+        >
           {t("Home.Description1")}
         </h1>
-        <h1 className={styles.description3} suppressHydrationWarning>
+        <h1
+          className={styles.description3}
+          data-testid="description2"
+          suppressHydrationWarning
+        >
           {t("Home.Description2")}
         </h1>
       </div>

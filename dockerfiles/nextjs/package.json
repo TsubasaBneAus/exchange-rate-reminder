@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watch --verbose"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

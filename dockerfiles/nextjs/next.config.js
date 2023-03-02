@@ -9,7 +9,7 @@ const NextConfig = {
     return config;
   },
 
-  // Uncomment below when developing the app to enable hot reloading
+  // Uncomment below when developing the app in docker to enable hot reloading
   // webpackDevMiddleware: (config) => {
   //   config.watchOptions = {
   //     poll: 5000,
@@ -17,6 +17,7 @@ const NextConfig = {
   //   };
   //   return config;
   // },
+
   output: "standalone",
 };
 
