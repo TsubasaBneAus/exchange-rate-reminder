@@ -37,8 +37,15 @@ def main():
             json_data = response.json()
             print(f"{current_datetime}: Data has been fetched decently!")
         except requests.HTTPError:
-            json_data = None
-            print(f"{current_datetime}: Failed to fetch the data!")
+            # Retry to fetch data in case of not being able to fetch data at the 1st time
+            try:
+                response = requests.request("GET", url, headers=headers, data=payload)
+                response.raise_for_status()
+                json_data = response.json()
+                print(f"{current_datetime}: Data has been fetched decently!")
+            except requests.HTTPError:
+                json_data = None
+                print(f"{current_datetime}: Failed to fetch the data!")
 
         # Execute a query to store the exchange rate data
         db.execute_query(db_config, json_data)
