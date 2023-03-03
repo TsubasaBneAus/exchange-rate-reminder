@@ -6,7 +6,7 @@ import Modal from "../components/Modal";
 import currencies from "../lib/currencies";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 const Home = () => {
@@ -22,9 +22,9 @@ const Home = () => {
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState("");
 
-  // Get user preferences of currencies used for the exchange rate
-  const getPreferences = async () => {
-    const response = await fetch("/api/getPreferences");
+  // Get user preference of currencies used for the exchange rate
+  const getPreference = async () => {
+    const response = await fetch("/api/getPreference");
     const result = await response.json();
     currencies.map((each) => {
       if (result.base === each.value) {
@@ -36,7 +36,7 @@ const Home = () => {
     });
 
     // Display the current exchange rate and fetched date and time
-    // if users have already set preference of the currencies
+    // if a user has already set preference of the currencies
     if (result.base !== null && result.converted !== null) {
       setExchangeRate(result.exchangeRate);
       setFetchedDatetime(result.fetchedDatetime);
@@ -44,17 +44,17 @@ const Home = () => {
 
     // Change languages to the one users selected previously
     if (result.language !== null) {
-      router.push(`/${result.language}`)
+      router.push(`/${result.language}`);
     }
   };
 
   useEffect(() => {
-    getPreferences();
+    getPreference();
   }, []);
 
-  // Load the current user preferences of currencies
+  // Load the current user preference of currencies
   const showExchangeRate = () => {
-    // Check if users have already set the currency for the exchange rate
+    // Check if a user has already set the currency for the exchange rate
     if (initialBase === null || initialConverted === null) {
       return <h1 className={styles.title}>{t("Home.Title1")}</h1>;
     } else {
@@ -73,7 +73,9 @@ const Home = () => {
                 </p>
               </div>
             </div>
-            <p className={styles.content4}>{t("Home.Datetime")}: {fetchedDatetime}</p>
+            <p className={styles.content4}>
+              {t("Home.Datetime")}: {fetchedDatetime}
+            </p>
           </div>
         </div>
       );
@@ -86,13 +88,12 @@ const Home = () => {
 
     // Check if currencies used for the exchange rate are registered to the database
     if (base !== null && converted !== null) {
-      await fetch("/api/updatePreferences", {
+      await fetch("/api/updateCurrencies", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          language: i18n.language,
           base: base,
           converted: converted,
         }),
@@ -103,7 +104,7 @@ const Home = () => {
     }
   };
 
-  // Check if users have already signed up or logged in
+  // Check if a user has already signed up or logged in
   if (session) {
     return (
       <div className={styles.container1}>
@@ -131,7 +132,7 @@ const Home = () => {
           modal={modal}
           setModal={setModal}
           modalType={modalType}
-          getPreferences={getPreferences}
+          getPreference={getPreference}
         />
       </div>
     );

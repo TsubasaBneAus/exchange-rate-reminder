@@ -8,12 +8,27 @@ import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import languages from "../lib/languages";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const LanguageMenu = () => {
   const router = useRouter();
+  const { t, i18n } = useTranslation("");
   const { pathname, asPath, query } = router;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  // Update user preference of languages
+  const updateLanguages = async (language: string) => {
+    await fetch("/api/updateLanguages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        language: language,
+      }),
+    });
+  }
 
   // Handle the click event for the button
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,6 +41,7 @@ const LanguageMenu = () => {
     languages.map((each) => {
       if (index === each.id) {
         router.push({ pathname, query }, asPath, { locale: each.language });
+        updateLanguages(each.language);
       }
     });
   };

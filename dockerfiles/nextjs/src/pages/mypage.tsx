@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import { signIn, useSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import Modal from "../components/Modal";
 import styles from "../styles/MyPage.module.css";
 
@@ -13,7 +13,7 @@ const MyPage = () => {
   const [modalType, setModalType] = useState("");
 
   useEffect(() => {
-    // Redirect to sign in page if users have not signed in or logged in yet
+    // Redirect to sign in page if a user have not signed in or logged in yet
     if (!session) {
       signIn("google", { callbackUrl: "/" });
     }
@@ -24,7 +24,7 @@ const MyPage = () => {
     setModal(true);
   };
 
-  // Check if users have already signed up or logged in
+  // Check if a user has already signed up or logged in
   if (session) {
     return (
       <div className={styles.formContainer}>

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
-// Send inquiry emails for users to contact
+// Send an inquiry email for users to contact
 const SendEmail = (req: NextApiRequest, res: NextApiResponse) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
