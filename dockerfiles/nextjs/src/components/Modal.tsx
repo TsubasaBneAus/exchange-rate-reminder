@@ -3,14 +3,14 @@ import { signOut } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import styles from "../styles/Modal.module.css";
 
 interface Props {
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
   modalType: string;
-  getPreferences?: () => void;
+  getPreference?: () => void;
 }
 
 interface ModalText {
@@ -48,7 +48,7 @@ const Modal = (props: Props) => {
     switch (modalAction.button1) {
       case "Refetch the data":
         props.setModal(false);
-        props.getPreferences?.();
+        props.getPreference?.();
         router.push("/");
         break;
 
@@ -160,6 +160,7 @@ const Modal = (props: Props) => {
     }
   }, [props.modalType, modalType, t]);
 
+  // Check if a modal should be displayed
   if (props.modal) {
     return (
       <div className={styles.overlay}>

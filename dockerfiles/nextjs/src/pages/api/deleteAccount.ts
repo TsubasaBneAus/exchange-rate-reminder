@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
 
-// Delete user accounts from the database
+// Delete user account from the database
 const DeleteAccount = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  // Check if users have already signed up or logged in
+  // Check if a user has already signed up or logged in
   if (session) {
     // Delete all records of the user from the database
     const deletedRecords = await prisma.user.delete({

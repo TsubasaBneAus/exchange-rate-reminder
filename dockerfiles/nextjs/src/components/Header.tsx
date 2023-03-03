@@ -12,7 +12,7 @@ const Header = () => {
 
   // Change the contents of the navigation bar according to the user session
   const navbar = () => {
-    // Check if users have already signed up or logged in
+    // Check if a user has already signed up or logged in
     if (session) {
       return (
         <>
