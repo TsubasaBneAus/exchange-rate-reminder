@@ -37,21 +37,21 @@ services:
     volumes:
       - db-volume:/var/lib/mysql
 
-  # python:
-  #   image: python
-  #   container_name: python
-  #   build:
-  #     context: ./dockerfiles/python
-  #     dockerfile: Dockerfile
-  #     args:
-  #       - TZ=$TZ
-  #   ports:
-  #     - 3308:3308
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - ./dockerfiles/python/:/app
-  #   tty: true
+  python:
+    image: python
+    container_name: python
+    build:
+      context: ./dockerfiles/python
+      dockerfile: Dockerfile
+      args:
+        - TZ=$TZ
+    ports:
+      - 3308:3308
+    env_file:
+      - .env
+    volumes:
+      - ./dockerfiles/python/:/app
+    tty: true
 
 volumes:
   front_node_modules:
