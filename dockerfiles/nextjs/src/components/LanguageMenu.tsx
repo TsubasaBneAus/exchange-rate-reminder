@@ -9,9 +9,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import languages from "../lib/languages";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { useSession } from "next-auth/react";
 
 const LanguageMenu = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const { t, i18n } = useTranslation("");
   const { pathname, asPath, query } = router;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -41,7 +43,11 @@ const LanguageMenu = () => {
     languages.map((each) => {
       if (index === each.id) {
         router.push({ pathname, query }, asPath, { locale: each.language });
-        updateLanguages(each.language);
+
+        // Check if a user has already signed up or logged in
+        if (session) {
+          updateLanguages(each.language);
+        }
       }
     });
   };
