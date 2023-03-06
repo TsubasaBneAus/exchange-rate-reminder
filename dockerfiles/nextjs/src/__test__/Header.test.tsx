@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import Header from "../components/Header";
 import { useSession } from "next-auth/react";
+import Header from "../components/Header";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -37,7 +37,7 @@ describe("Header Component", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
-          username: "test",
+          username: "test user",
         },
       },
       status: "authenticated",
@@ -50,7 +50,7 @@ describe("Header Component", () => {
   });
 
   test("renders 2 list items when a user is unauthenticated", async () => {
-    (useSession as jest.Mock).mockReturnValueOnce({
+    (useSession as jest.Mock).mockReturnValue({
       data: null,
       status: "unauthenticated",
     });
