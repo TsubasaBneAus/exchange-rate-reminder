@@ -1,7 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
+import React from "react";
 import Home from "../pages/index";
+import { act } from "react-dom/test-utils";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -33,7 +35,7 @@ jest.mock("next/router", () => ({
 jest.mock("next-auth/react");
 
 describe("Home Component", () => {
-  test("renders 2 labels, 1 button and 2 texts when a user is authenticated and has already set their preference", async () => {
+  test("renders 6 texts and 1 button when a user is authenticated and has already set their preference", async () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
@@ -56,9 +58,16 @@ describe("Home Component", () => {
       })
     ) as jest.Mock;
 
+    const initialBase = "AUD";
+    const initialConverted = "JPY";
+    jest
+      .spyOn(React, "useState")
+      .mockImplementationOnce(() => [initialBase, () => null])
+      .mockImplementationOnce(() => [initialConverted, () => null]);
+
     render(<Home />);
     expect(screen.getByText("Home.Title2")).toBeInTheDocument();
-    expect(screen.getByText("Home.Datetime")).toBeInTheDocument();
+    expect(screen.getByText("Home.Datetime:")).toBeInTheDocument();
     expect(screen.getByText("Home.Label1")).toBeInTheDocument();
     expect(screen.getByText("Home.Label2")).toBeInTheDocument();
     expect(screen.getByText("Home.Button")).toBeInTheDocument();
@@ -66,7 +75,7 @@ describe("Home Component", () => {
     expect(screen.getByText("Home.Description4")).toBeInTheDocument();
   });
 
-  test("renders 6 texts when a user is authenticated and has set their preference yet", async () => {
+  test("renders 5 texts and 1 button when a user is authenticated and has set their preference yet", async () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
