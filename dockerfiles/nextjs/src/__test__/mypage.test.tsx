@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import Header from "../components/Header";
+import MyPage from "../pages/mypage";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -32,8 +32,8 @@ jest.mock("next/router", () => ({
 
 jest.mock("next-auth/react");
 
-describe("Header Component", () => {
-  test("renders 3 list items when a user is authenticated", () => {
+describe("MyPage Component", () => {
+  test("renders 1 text and 1 button when a user is authenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
@@ -43,20 +43,19 @@ describe("Header Component", () => {
       status: "authenticated",
     });
 
-    render(<Header />);
-    expect(screen.getByText("Header.MyPage")).toBeInTheDocument();
-    expect(screen.getByText("Header.Contact")).toBeInTheDocument();
-    expect(screen.getByText("Header.SignOut")).toBeInTheDocument();
+    render(<MyPage />);
+    expect(screen.getByText("MyPage.Title")).toBeInTheDocument();
+    expect(screen.getByText("MyPage.Button")).toBeInTheDocument();
   });
-
-  test("renders 2 list items when a user is unauthenticated", () => {
+  
+  test("renders nothing when a user is unauthenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: null,
       status: "unauthenticated",
     });
 
-    render(<Header />);
-    expect(screen.getByText("Header.SignIn")).toBeInTheDocument();
-    expect(screen.getByText("Header.Contact")).toBeInTheDocument();
+    render(<MyPage />);
+    expect(screen.queryByText("MyPage.Title")).not.toBeInTheDocument();
+    expect(screen.queryByText("MyPage.Button")).not.toBeInTheDocument();
   });
 });
