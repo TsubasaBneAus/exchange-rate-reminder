@@ -10,7 +10,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 const Home = () => {
-  const { t, i18n } = useTranslation("");
+  const { t } = useTranslation("");
   const router = useRouter();
   const { data: session } = useSession();
   const [initialBase, setInitialBase] = useState<string | null>(null);

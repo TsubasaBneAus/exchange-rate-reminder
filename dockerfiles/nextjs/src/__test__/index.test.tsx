@@ -1,9 +1,8 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import React from "react";
 import Home from "../pages/index";
-import { act } from "react-dom/test-utils";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -66,13 +65,15 @@ describe("Home Component", () => {
       .mockImplementationOnce(() => [initialConverted, () => null]);
 
     render(<Home />);
-    expect(screen.getByText("Home.Title2")).toBeInTheDocument();
-    expect(screen.getByText("Home.Datetime:")).toBeInTheDocument();
-    expect(screen.getByText("Home.Label1")).toBeInTheDocument();
-    expect(screen.getByText("Home.Label2")).toBeInTheDocument();
-    expect(screen.getByText("Home.Button")).toBeInTheDocument();
-    expect(screen.getByText("Home.Description3")).toBeInTheDocument();
-    expect(screen.getByText("Home.Description4")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Home.Title2")).toBeInTheDocument();
+      expect(screen.getByText("Home.Datetime:")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label2")).toBeInTheDocument();
+      expect(screen.getByText("Home.Button")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description3")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description4")).toBeInTheDocument();
+    });
   });
 
   test("renders 5 texts and 1 button when a user is authenticated and has set their preference yet", async () => {
@@ -98,12 +99,14 @@ describe("Home Component", () => {
     ) as jest.Mock;
 
     render(<Home />);
-    expect(screen.getByText("Home.Title1")).toBeInTheDocument();
-    expect(screen.getByText("Home.Label1")).toBeInTheDocument();
-    expect(screen.getByText("Home.Label2")).toBeInTheDocument();
-    expect(screen.getByText("Home.Button")).toBeInTheDocument();
-    expect(screen.getByText("Home.Description3")).toBeInTheDocument();
-    expect(screen.getByText("Home.Description4")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Home.Title1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label2")).toBeInTheDocument();
+      expect(screen.getByText("Home.Button")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description3")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description4")).toBeInTheDocument();
+    });
   });
 
   test("renders 2 texts when a user is unauthenticated", async () => {
@@ -113,7 +116,9 @@ describe("Home Component", () => {
     });
 
     render(<Home />);
-    expect(screen.getByText("Home.Description1")).toBeInTheDocument();
-    expect(screen.getByText("Home.Description2")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Home.Description1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description2")).toBeInTheDocument();
+    });
   });
 });
