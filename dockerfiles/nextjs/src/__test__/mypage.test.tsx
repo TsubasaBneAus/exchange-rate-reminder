@@ -47,7 +47,7 @@ describe("MyPage Component", () => {
     expect(screen.getByText("MyPage.Title")).toBeInTheDocument();
     expect(screen.getByText("MyPage.Button")).toBeInTheDocument();
   });
-  
+
   test("renders nothing when a user is unauthenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: null,
