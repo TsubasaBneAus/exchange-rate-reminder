@@ -1,45 +1,124 @@
-// import { render, screen, fireEvent } from "@testing-library/react";
-// import Home from "../pages/index";
-// import { SessionProvider } from "next-auth/react";
+import "@testing-library/jest-dom";
+import { render, screen, waitFor } from "@testing-library/react";
+import { useSession } from "next-auth/react";
+import React from "react";
+import Home from "../pages/index";
 
-// jest.mock("next/router", () => ({
-//   useRouter() {},
-// }));
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "/",
+      query: {},
+      asPath: "/",
+      basePath: "/",
+      isLocaleDomain: true,
+      isReady: true,
+      push: jest.fn(),
+      prefetch: jest.fn(),
+      replace: jest.fn(),
+      reload: jest.fn(),
+      back: jest.fn(),
+      beforePopState: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+        emit: jest.fn(),
+      },
+      isFallback: false,
+      isPreview: false,
+    };
+  },
+}));
 
-// jest.mock("next-auth/react", () => {
-//   const originalModule = jest.requireActual('next-auth/react')w;
-//   const mockSession = {
-//     expires: new Date(Date.now() + 2 * 86400).toISOString(),
-//     user: { username: "admin" }
-//   };
-//   return {
-//     __esModule: true,
-//     ...originalModule,
-//     useSession: jest.fn(() => {
-//       return {data: mockSession, status: 'unauthenticated'}  // return type is [] in v3 but changed to {} in v4
-//     }),
-//   };
-// });
+jest.mock("next-auth/react");
 
-// jest.mock("react-i18next", () => ({
-//   useTranslation: () => {
-//     return {
-//       t: (str: string) => str,
-//       i18n: {
-//         changeLanguage: () => new Promise(() => {}),
-//       },
-//     };
-//   },
-// }));
+describe("Home Component", () => {
+  test("renders 6 texts and 1 button when a user is authenticated and has already set their preference", async () => {
+    (useSession as jest.Mock).mockReturnValue({
+      data: {
+        user: {
+          username: "test user",
+        },
+      },
+      status: "authenticated",
+    });
 
-// describe("Home", () => {
-//   test("renders 2 texts when users have not logged in yet", () => {
-//     render(<Home />);
-//     expect(screen.getByTestId("description1")).toHaveTextContent(
-//       "Home.Description1"
-//     );
-//     expect(screen.getByTestId("description2")).toHaveTextContent(
-//       "Home.Description2"
-//     );
-//   });
-// });
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            language: "ja",
+            base: "rate_aud",
+            converted: "rate_jpy",
+            exchangeRate: 92.1,
+            fetchedDatetime: "2023-03-01 10:00:00 JST",
+          }),
+      })
+    ) as jest.Mock;
+
+    const initialBase = "AUD";
+    const initialConverted = "JPY";
+    jest
+      .spyOn(React, "useState")
+      .mockImplementationOnce(() => [initialBase, () => null])
+      .mockImplementationOnce(() => [initialConverted, () => null]);
+
+    render(<Home />);
+    await waitFor(() => {
+      expect(screen.getByText("Home.Title2")).toBeInTheDocument();
+      expect(screen.getByText("Home.Datetime:")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label2")).toBeInTheDocument();
+      expect(screen.getByText("Home.Button")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description3")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description4")).toBeInTheDocument();
+    });
+  });
+
+  test("renders 5 texts and 1 button when a user is authenticated and has set their preference yet", async () => {
+    (useSession as jest.Mock).mockReturnValue({
+      data: {
+        user: {
+          username: "test user",
+        },
+      },
+      status: "authenticated",
+    });
+
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            language: null,
+            base: null,
+            converted: null,
+            fetchedDatetime: null,
+          }),
+      })
+    ) as jest.Mock;
+
+    render(<Home />);
+    await waitFor(() => {
+      expect(screen.getByText("Home.Title1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Label2")).toBeInTheDocument();
+      expect(screen.getByText("Home.Button")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description3")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description4")).toBeInTheDocument();
+    });
+  });
+
+  test("renders 2 texts when a user is unauthenticated", async () => {
+    (useSession as jest.Mock).mockReturnValue({
+      data: null,
+      status: "unauthenticated",
+    });
+
+    render(<Home />);
+    await waitFor(() => {
+      expect(screen.getByText("Home.Description1")).toBeInTheDocument();
+      expect(screen.getByText("Home.Description2")).toBeInTheDocument();
+    });
+  });
+});
