@@ -8,6 +8,8 @@ services:
       - ./dockerfiles/nginx/dev:/etc/nginx/conf.d
     depends_on:
       - nextjs
+    networks:
+      - shared-network
 
   nextjs:
     image: nextjs-dev
@@ -26,6 +28,8 @@ services:
     tty: true
     depends_on:
       - mysql
+    networks:
+      - shared-network
 
   mysql:
     image: mysql:8.0
@@ -36,6 +40,8 @@ services:
       - .env
     volumes:
       - db-volume:/var/lib/mysql
+    networks:
+      - shared-network
 
   python:
     image: python
@@ -52,7 +58,13 @@ services:
     volumes:
       - ./dockerfiles/python/:/app
     tty: true
+    networks:
+      - shared-network
 
 volumes:
   front_node_modules:
   db-volume:
+
+networks:
+  shared-network:
+    external: true
