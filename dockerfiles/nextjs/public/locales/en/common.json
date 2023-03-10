@@ -42,5 +42,8 @@
     "Button2": "Back to Home",
     "Button3": "Yes",
     "Button4": "No"
+  },
+  "Selectbox": {
+    "Placeholder": "Please select a currency"
   }
 }
