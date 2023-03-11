@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import Header from "../components/Header";
+import Layout from "../components/Layout";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -31,8 +31,8 @@ jest.mock("next/router", () => ({
 
 jest.mock("next-auth/react");
 
-describe("Header Component", () => {
-  test("renders 3 list items when a user is authenticated", () => {
+describe("Layout Component", () => {
+  test("renders Header, main, Footer components and their wrapped div tag when a user is authenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
@@ -42,22 +42,23 @@ describe("Header Component", () => {
       status: "authenticated",
     });
 
-    render(<Header />);
-    expect(screen.getByText("Exchange Rate Reminder")).toBeInTheDocument();
-    expect(screen.getByText("Header.MyPage")).toBeInTheDocument();
-    expect(screen.getByText("Header.Contact")).toBeInTheDocument();
-    expect(screen.getByText("Header.SignOut")).toBeInTheDocument();
-  });
+    render(<Layout children />);
+    expect(screen.getByTestId("layout")).toBeInTheDocument();
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getByRole("main")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+  })
 
-  test("renders 2 list items when a user is unauthenticated", () => {
+  test("renders Header, main, Footer components and their wrapped div tag when a user is unauthenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: null,
       status: "unauthenticated",
     });
 
-    render(<Header />);
-    expect(screen.getByText("Exchange Rate Reminder")).toBeInTheDocument();
-    expect(screen.getByText("Header.SignIn")).toBeInTheDocument();
-    expect(screen.getByText("Header.Contact")).toBeInTheDocument();
+    render(<Layout children />);
+    expect(screen.getByTestId("layout")).toBeInTheDocument();
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getByRole("main")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
-});
+})
