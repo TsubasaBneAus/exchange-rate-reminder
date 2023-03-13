@@ -42,5 +42,8 @@
     "Button2": "ホームに戻る",
     "Button3": "はい",
     "Button4": "いいえ"
+  },
+  "Selectbox": {
+    "Placeholder": "通貨を選択してください"
   }
 }

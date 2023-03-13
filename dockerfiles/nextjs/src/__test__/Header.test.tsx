@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
 import Header from "../components/Header";
@@ -44,6 +43,7 @@ describe("Header Component", () => {
     });
 
     render(<Header />);
+    expect(screen.getByText("Exchange Rate Reminder")).toBeInTheDocument();
     expect(screen.getByText("Header.MyPage")).toBeInTheDocument();
     expect(screen.getByText("Header.Contact")).toBeInTheDocument();
     expect(screen.getByText("Header.SignOut")).toBeInTheDocument();
@@ -56,6 +56,7 @@ describe("Header Component", () => {
     });
 
     render(<Header />);
+    expect(screen.getByText("Exchange Rate Reminder")).toBeInTheDocument();
     expect(screen.getByText("Header.SignIn")).toBeInTheDocument();
     expect(screen.getByText("Header.Contact")).toBeInTheDocument();
   });

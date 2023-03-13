@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import MyPage from "../pages/mypage";
+import Layout from "../components/Layout";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -31,8 +31,8 @@ jest.mock("next/router", () => ({
 
 jest.mock("next-auth/react");
 
-describe("MyPage Component", () => {
-  test("renders 1 text and 1 button when a user is authenticated", () => {
+describe("Layout Component", () => {
+  test("renders Header, main, Footer components and their wrapped div tag when a user is authenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
@@ -42,19 +42,23 @@ describe("MyPage Component", () => {
       status: "authenticated",
     });
 
-    render(<MyPage />);
-    expect(screen.getByText("MyPage.Title")).toBeInTheDocument();
-    expect(screen.getByText("MyPage.Button")).toBeInTheDocument();
-  });
+    render(<Layout children />);
+    expect(screen.getByTestId("layout")).toBeInTheDocument();
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getByRole("main")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+  })
 
-  test("renders nothing when a user is unauthenticated", () => {
+  test("renders Header, main, Footer components and their wrapped div tag when a user is unauthenticated", () => {
     (useSession as jest.Mock).mockReturnValue({
       data: null,
       status: "unauthenticated",
     });
 
-    render(<MyPage />);
-    expect(screen.queryByText("MyPage.Title")).not.toBeInTheDocument();
-    expect(screen.queryByText("MyPage.Button")).not.toBeInTheDocument();
+    render(<Layout children />);
+    expect(screen.getByTestId("layout")).toBeInTheDocument();
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getByRole("main")).toBeInTheDocument();
+    expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
-});
+})

@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import MyPage from "../pages/mypage";
+import userEvent from "@testing-library/user-event";
+import LanguageMenu from "../components/LanguageMenu";
 
 jest.mock("next/router", () => ({
   useRouter() {
@@ -31,8 +32,8 @@ jest.mock("next/router", () => ({
 
 jest.mock("next-auth/react");
 
-describe("MyPage Component", () => {
-  test("renders 1 text and 1 button when a user is authenticated", () => {
+describe("LanguageMenu Component", () => {
+  test("renders 2 list items when a user is authenticated", async () => {
     (useSession as jest.Mock).mockReturnValue({
       data: {
         user: {
@@ -42,19 +43,27 @@ describe("MyPage Component", () => {
       status: "authenticated",
     });
 
-    render(<MyPage />);
-    expect(screen.getByText("MyPage.Title")).toBeInTheDocument();
-    expect(screen.getByText("MyPage.Button")).toBeInTheDocument();
+    render(<LanguageMenu />);
+    userEvent.click(screen.getByRole("button"));
+
+    await waitFor(() => {
+      expect(screen.getByText("English")).toBeInTheDocument();
+      expect(screen.getByText("日本語")).toBeInTheDocument();
+    });
   });
 
-  test("renders nothing when a user is unauthenticated", () => {
+  test("renders 2 list items when a user is unauthenticated", async () => {
     (useSession as jest.Mock).mockReturnValue({
       data: null,
       status: "unauthenticated",
     });
 
-    render(<MyPage />);
-    expect(screen.queryByText("MyPage.Title")).not.toBeInTheDocument();
-    expect(screen.queryByText("MyPage.Button")).not.toBeInTheDocument();
+    render(<LanguageMenu />);
+    userEvent.click(screen.getByRole("button"));
+
+    await waitFor(() => {
+      expect(screen.getByText("English")).toBeInTheDocument();
+      expect(screen.getByText("日本語")).toBeInTheDocument();
+    });
   });
 });

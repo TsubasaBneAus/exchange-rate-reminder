@@ -9,9 +9,9 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="layout">
       <Header />
-        <main>{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );
