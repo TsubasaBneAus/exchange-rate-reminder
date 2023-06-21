@@ -23,8 +23,8 @@ const Home = () => {
   const [modalType, setModalType] = useState("");
 
   // Get user preference of currencies used for the exchange rate
-  const getPreference = async () => {
-    const response = await fetch("/api/getPreference");
+  const getPreferences = async () => {
+    const response = await fetch("/api/getPreferences");
     const result = await response.json();
     currencies.map((each) => {
       if (result.base === each.value) {
@@ -43,13 +43,26 @@ const Home = () => {
     }
 
     // Change languages to the one users selected previously
+    // Otherwise Japanese is selected as a default
     if (result.language !== null) {
       router.push(`/${result.language}`);
+    }
+    else
+    {
+      fetch("/api/updateLanguage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          language: "ja",
+        }),
+      });
     }
   };
 
   useEffect(() => {
-    getPreference();
+    getPreferences();
   }, []);
 
   // Load the current user preference of currencies
@@ -88,12 +101,13 @@ const Home = () => {
 
     // Check if currencies used for the exchange rate are registered to the database
     if (base !== null && converted !== null) {
-      await fetch("/api/updateCurrencies", {
+      await fetch("/api/updatePreferences", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          language: router.locale,
           base: base,
           converted: converted,
         }),
@@ -132,7 +146,7 @@ const Home = () => {
           modal={modal}
           setModal={setModal}
           modalType={modalType}
-          getPreference={getPreference}
+          getPreferences={getPreferences}
         />
       </div>
     );
