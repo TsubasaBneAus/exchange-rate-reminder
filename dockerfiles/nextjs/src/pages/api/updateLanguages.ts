@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { authOptions } from "./auth/[...nextauth]";
+import { getServerSession } from 'next-auth/next';
 import prisma from "../../lib/prisma";
 
 // Update user preference of languages
 const UpdateLanguages = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions)
   const result = await prisma.userPreference.update({
     where: {
       id: session?.user.id,

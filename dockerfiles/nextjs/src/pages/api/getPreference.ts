@@ -1,11 +1,12 @@
 import { ExchangeRate } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { authOptions } from "./auth/[...nextauth]";
+import { getServerSession } from 'next-auth/next';
 import prisma from "../../lib/prisma";
 
 // Get user preference of currencies used for the exchange rate from database
 const getPreference = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions)
 
   // Calculate the exchange rate
   const calcExchangeRate = (exchangeRate: number) => {
