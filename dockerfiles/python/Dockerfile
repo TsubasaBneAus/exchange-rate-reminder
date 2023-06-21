@@ -12,8 +12,7 @@ WORKDIR /app
 COPY src-db ./src-db
 COPY src-email ./src-email
 
-# Install the required packages listed in requirements.txt
-# and set the file permission for each main.py
+# Install the required packages listed in requirements.txt for each directory
 WORKDIR /app/src-db
 RUN pip install -r requirements.txt
 WORKDIR /app/src-email
