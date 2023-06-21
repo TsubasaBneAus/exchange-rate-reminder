@@ -21,7 +21,7 @@ const LanguageMenu = () => {
 
   // Update user preference of languages
   const updateLanguages = async (language: string) => {
-    await fetch("/api/updateLanguages", {
+    await fetch("/api/updateLanguage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

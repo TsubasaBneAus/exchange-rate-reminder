@@ -10,7 +10,7 @@ interface Props {
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
   modalType: string;
-  getPreference?: () => void;
+  getPreferences?: () => void;
 }
 
 interface ModalText {
@@ -48,7 +48,7 @@ const Modal = (props: Props) => {
     switch (modalAction.button1) {
       case "Refetch the data":
         props.setModal(false);
-        props.getPreference?.();
+        props.getPreferences?.();
         router.push("/");
         break;
 
