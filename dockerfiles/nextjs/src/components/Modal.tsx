@@ -166,15 +166,17 @@ const Modal = (props: Props) => {
       <div className={styles.overlay}>
         <div className={styles.content}>
           <p className={styles.sentence}>{modalText.text}</p>
-          <button
-            className={styles.button}
-            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-              handleClick1(e)
-            }
-          >
-            {modalText.button1}
-          </button>
-          {showAnotherButton()}
+          <div className={styles.buttonContainer}>
+            <button
+              className={styles.button}
+              onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+                handleClick1(e)
+              }
+            >
+              {modalText.button1}
+            </button>
+            {showAnotherButton()}
+          </div>
         </div>
       </div>
     );

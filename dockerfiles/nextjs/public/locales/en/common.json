@@ -25,11 +25,13 @@
     "Placeholder1": "Please enter your name",
     "Placeholder2": "Please enter your email address",
     "Placeholder3": "Please enter your message",
-    "Button": "Send"
+    "Button1": "Send",
+    "Button2": "Back to Home"
   },
   "MyPage": {
     "Title": "My Page",
-    "Button": "Delete your account"
+    "Button1": "Delete your account",
+    "Button2": "Back to Home"
   },
   "Modal": {
     "Text1": "The settings has been saved!",

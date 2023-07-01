@@ -13,12 +13,11 @@
 
 .content {
   background: white;
-  padding: 15px;
   border-radius: 10px;
   box-shadow: 6px 6px 10px 0px rgba(3, 3, 3, 0.6);
   max-width: 500px;
-  width: 70%;
-  height: 25%;
+  width: 100%;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,17 +29,27 @@
   color: black;
   font-size: 25px;
   font-weight: 700;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .button {
   color: white;
   background-color: rgb(45, 112, 189);
-  max-width: 350px;
-  width: 95%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  max-width: 460px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 5px;
@@ -54,6 +63,10 @@
 
 @media screen and (max-width: 760px) {
   .content {
-    width: 100%;
+    width: 95%;
+  }
+
+  .buttonContainer {
+    width: 95%;
   }
 }
