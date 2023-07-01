@@ -10,13 +10,13 @@ const NextConfig = {
   },
 
   // Uncomment below when developing the app in docker to enable hot reloading
-  // webpackDevMiddleware: (config) => {
-  //   config.watchOptions = {
-  //     poll: 5000,
-  //     aggregateTimeout: 300,
-  //   };
-  //   return config;
-  // },
+  webpackDevMiddleware: (config) => {
+    config.watchOptions = {
+      poll: 5000,
+      aggregateTimeout: 300,
+    };
+    return config;
+  },
 
   output: "standalone",
 };

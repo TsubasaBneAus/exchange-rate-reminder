@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import Modal from "../components/Modal";
@@ -7,12 +8,12 @@ import styles from "../styles/Contact.module.css";
 
 const Contact = () => {
   const { t } = useTranslation("");
+  const router = useRouter();
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
     message: "",
   });
-
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState("");
 
@@ -55,6 +56,12 @@ const Contact = () => {
         body: JSON.stringify(formValues),
       });
     }
+  };
+
+  // Handle the onclick event for going back to home
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/");
   };
 
   return (
@@ -111,8 +118,16 @@ const Contact = () => {
               required
             />
           </div>
-          <button className={styles.button} type="submit">
-            {t("Contact.Button")}
+          <button className={styles.button1} type="submit">
+            {t("Contact.Button1")}
+          </button>
+          <button
+            className={styles.button2}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              handleClick(e);
+            }}
+          >
+            {t("Contact.Button2")}
           </button>
         </div>
       </form>

@@ -25,11 +25,13 @@
     "Placeholder1": "名前を入力してください",
     "Placeholder2": "メールアドレスを入力してください",
     "Placeholder3": "メッセージを入力してください",
-    "Button": "送信"
+    "Button1": "送信",
+    "Button2": "ホームに戻る"
   },
   "MyPage": {
     "Title": "マイページ",
-    "Button": "アカウントを削除する"
+    "Button1": "アカウントを削除する",
+    "Button2": "ホームに戻る"
   },
   "Modal": {
     "Text1": "設定を変更しました。",
