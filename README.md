@@ -9,4 +9,4 @@ The Website above is now OPEN to show it as my portfolio for job hunting.
 The Exchange Rate Reminder is a Web Application to let users know the current exchange rate by email.
 The email is sent twice a day (6am and 6pm JST).
 
-![aws-err-vpc-diagram drawio (4)](https://user-images.githubusercontent.com/103486301/221421797-1a129a29-328c-42d6-b51a-5fb70208ff5d.png)
+![aws-err-vpc-diagram drawio (5)](https://github.com/TsubasaBneAus/exchange-rate-reminder/assets/103486301/594a5baf-13ec-45c3-926d-a8d73b933646)
