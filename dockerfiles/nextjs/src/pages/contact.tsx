@@ -111,7 +111,7 @@ const Contact = () => {
               name="message"
               placeholder={t("Contact.Placeholder3")!}
               value={formValues.message}
-              rows={10}
+              rows={7}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 handleChange(e)
               }
